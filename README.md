@@ -58,3 +58,8 @@ Service names and logos are owned by their respective companies. StreamBox Congo
 - New quote-only offers (no invented prices): Recharge jeux mobiles (by player ID), Cartes cadeaux, Crunchyroll. Edit them in the block just before `WORKING_LOGOS`.
 - New one-line note under the steps: "for you or for someone close, ask a quote for anything else". It opens the external-purchase quote.
 - Service worker cache: `streambox-congo-v5`.
+
+## Update 5.1 (TMDB diagnosis)
+- Add `#debug` at the end of the site address (for example `https://your-site/#debug`) to see why the posters are not loading: the label under "À l'affiche" then shows the reason (for example `TMDB 401` = key refused, `réseau bloqué` = TMDB unreachable from this connection).
+- `TMDB.key` accepts either the v3 "API Key" (32 characters) or the long v4 "API Read Access Token" (sent as a Bearer header).
+- Fallback posters now show large initials instead of a plain gradient. Timeout raised to 9 s for slow mobile connections.

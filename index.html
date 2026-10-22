@@ -362,6 +362,9 @@
 .pay-any{display:block;width:100%;max-width:560px;margin-top:18px;text-align:left;border:1px solid #f2b63266;border-radius:12px;background:#f2b6320f;color:var(--ink);padding:11px 14px;font:400 14px/1.45 var(--body);cursor:pointer;transition:box-shadow .25s,border-color .25s}
 .pay-any:hover{border-color:var(--gold);box-shadow:0 0 18px #f2b63238}
 @media(max-width:900px){.pay-any{max-width:none}}
+
+.poster-mark{position:absolute;top:38%;left:0;right:0;transform:translateY(-50%);text-align:center;font:800 58px/1 var(--display);letter-spacing:-.04em;color:#ffffff33;text-shadow:0 0 24px #ffffff22}
+.poster-art img~.poster-mark{display:none}
 </style>
 </head>
 <body>
@@ -808,7 +811,7 @@
      chaque affiche est déjà sur la plateforme annoncée. Région = pays dont le catalogue sert de référence.
      La clé v3 est visible dans le code de la page (normal pour ce type de clé) : régénérez-la si elle est détournée.
      Les affiches de secours s'affichent immédiatement ; TMDB les remplace s'il répond à temps. */
-  const TMDB={key:"15d2ea6d0daf1e476e34327ba5735309",base:"https://api.themoviedb.org/3",img:"https://image.tmdb.org/t/p",region:"FR",timeout:6000,freshMs:60*60*1000,cacheKey:"sb-trends-v2",providers:[["netflix","8"],["prime","119"],["disney","337"]]};
+  const TMDB={key:"15d2ea6d0daf1e476e34327ba5735309",base:"https://api.themoviedb.org/3",img:"https://image.tmdb.org/t/p",region:"FR",timeout:9000,freshMs:60*60*1000,cacheKey:"sb-trends-v2",providers:[["netflix","8"],["prime","119"],["disney","337"]]};
   const PLAT={netflix:{n:"Netflix",c:"#e64b58"},prime:{n:"Prime Video",c:"#53a9d9"},disney:{n:"Disney+",c:"#668de7"},apple:{n:"Apple TV",c:"#b8bcc9"}};
   const TREND_FALLBACK=[
     {title:"Squid Game",platform:"netflix",poster:null},
@@ -816,17 +819,18 @@
     {title:"The Mandalorian",platform:"disney",poster:null},
     {title:"Wednesday",platform:"netflix",poster:null}
   ];
-  let TRENDS=TREND_FALLBACK.slice(),trendState="default",trendsLoadedAt=0;
+  let TRENDS=TREND_FALLBACK.slice(),trendState="default",trendsLoadedAt=0,trendError="";
   function posterMarkup(tr,i){
     const pl=PLAT[tr.platform],img=tr.poster?`<img src="${TMDB.img}/w185${escapeHtml(tr.poster)}" srcset="${TMDB.img}/w185${escapeHtml(tr.poster)} 185w, ${TMDB.img}/w342${escapeHtml(tr.poster)} 342w" sizes="170px" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:"";
-    return `<button type="button" class="poster" data-trend="${i}" style="--tint:${pl.c};--pc:${pl.c}" aria-label="${escapeHtml(tr.title)} — ${pl.n}"><span class="poster-art">${img}<span class="poster-title">${escapeHtml(tr.title)}</span></span><span class="poster-badge">${pl.n}</span></button>`;
+    const ini=tr.title.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+    return `<button type="button" class="poster" data-trend="${i}" style="--tint:${pl.c};--pc:${pl.c}" aria-label="${escapeHtml(tr.title)} — ${pl.n}"><span class="poster-art">${img}<span class="poster-mark" aria-hidden="true">${escapeHtml(ini)}</span><span class="poster-title">${escapeHtml(tr.title)}</span></span><span class="poster-badge">${pl.n}</span></button>`;
   }
   function renderTrends(){const tk=$("#trendsTrack");if(tk)tk.innerHTML=TRENDS.map(posterMarkup).join("");}
   function setTrendStatus(state){
     trendState=state||trendState;
     const el=$("#trendsLive");if(!el)return;
     el.dataset.state=trendState;
-    el.textContent=trendState==="live"?"● "+t("trendsLive"):t("trendsDefault");
+    el.textContent=trendState==="live"?"● "+t("trendsLive"):t("trendsDefault")+(trendError&&/debug/.test(location.hash)?" — "+trendError:"");
   }
   const trendKey=()=>`${TMDB.cacheKey}-${lang}`;
   function trendCacheGet(){try{const o=JSON.parse(localStorage.getItem(trendKey())||"null");if(o&&Array.isArray(o.v)&&o.v.length>=4)return o;}catch(_){}return null;}
@@ -835,7 +839,8 @@
     const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),TMDB.timeout),lg=lang==="fr"?"fr-FR":"en-US";
     try{
       const lists=await Promise.all(TMDB.providers.map(async([platform,id])=>{
-        const r=await fetch(`${TMDB.base}/discover/tv?api_key=${TMDB.key}&language=${lg}&sort_by=popularity.desc&watch_region=${TMDB.region}&with_watch_providers=${id}&with_watch_monetization_types=flatrate&page=1`,{signal:ctrl.signal});
+        const bearer=TMDB.key.length>60;
+        const r=await fetch(`${TMDB.base}/discover/tv?${bearer?"":"api_key="+TMDB.key+"&"}language=${lg}&sort_by=popularity.desc&watch_region=${TMDB.region}&with_watch_providers=${id}&with_watch_monetization_types=flatrate&page=1`,{signal:ctrl.signal,headers:bearer?{Authorization:"Bearer "+TMDB.key,accept:"application/json"}:undefined});
         if(!r.ok)throw new Error("TMDB "+r.status);
         const j=await r.json();
         return (j.results||[]).filter(x=>x.poster_path&&(x.name||x.original_name)).slice(0,2).map(x=>({title:x.name||x.original_name,platform,poster:x.poster_path}));
@@ -854,7 +859,8 @@
     try{
       const v=await fetchTrends();
       TRENDS=v;trendsLoadedAt=Date.now();trendCacheSet(v);renderTrends();setTrendStatus("live");
-    }catch(err){console.info("[StreamBox] TMDB indisponible, affiches de secours :",err&&err.message);}
+    }catch(err){trendError=err&&err.name==="AbortError"?"délai dépassé (réseau lent ou TMDB bloqué)":err&&err.name==="TypeError"?"réseau bloqué ou refusé (TMDB inaccessible)":(err&&err.message)||String(err);
+      console.info("[StreamBox] TMDB indisponible, affiches de secours :",trendError);setTrendStatus();}
   }
   function openTrend(i){
     const tr=TRENDS[i];if(!tr)return;
