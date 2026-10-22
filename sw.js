@@ -1,5 +1,5 @@
 /* Relative-path service worker for plain static hosting and project subdirectories. */
-const CACHE_NAME = "streambox-congo-v2";
+const CACHE_NAME = "streambox-congo-v5";
 const BASE_URL = new URL("./", self.registration.scope);
 const CORE_FILES = [
   new URL("./", BASE_URL).href,

@@ -36,3 +36,25 @@ Deploy to any static host such as GitHub Pages, Netlify, or a static web server.
 ## Notes
 
 Service names and logos are owned by their respective companies. StreamBox Congo is an independent service and does not claim affiliation with them. Product details and availability are intentionally qualified and should be confirmed with the seller.
+
+## Update (Oct 2026)
+- Netflix now lists the four Congo plans (Mobile, Basic, Standard, Premium) and Spotify lists Individual and Student, with prices computed from official USD prices and the `BANK` settings (exchange rate, international card fee, VAT + additional centimes, fixed margin). Check `BANK` against your UBA statement.
+- Duration discounts reduced to 3 months: 3%, 6 months: 5% so margins stay positive.
+- Orders processed 8h–15h. Provided logos are embedded in the file; Disney+, ChatGPT, Claude and Gemini still load from public URLs with a text fallback.
+
+## Update (hero + tendances)
+- WhatsApp: `STORE.whatsapp` = `242056067092`. Every button and link goes through `waUrl()`, so this single value drives all of them.
+- Hero on 2 columns (desktop): title, text and the 3 steps on the left; "Now showing" poster carousel on the right. On mobile the carousel sits under the text and swipes horizontally.
+- Trends come from TMDB (`TMDB` constants near the end of the script). The 4 fallback posters render instantly; TMDB replaces them only if it answers within 4.5 s. The result is cached for 30 min in `sessionStorage`.
+- The platform of each title is read from TMDB watch-providers (Congo first, then FR/US/GB). It is a probable platform, not a guarantee of availability in Congo. Apple TV titles open the external-purchase quote.
+- Clicking a poster opens the order dialog on the matching offer (Netflix opens on Standard) and adds a `Selection : <title>` line to the WhatsApp message.
+- TMDB attribution is displayed in the footer, as TMDB requires. The v3 API key is visible in the page source; regenerate it on themoviedb.org if it is abused.
+- Service worker cache renamed to `streambox-congo-v4` so returning visitors get the new page.
+
+## Update (trends refresh, new offers, pay-anything note)
+- Trends now use one TMDB `discover/tv` request per platform (Netflix 8, Prime Video 119, Disney+ 337), sorted by popularity, so every poster is already on its platform. Region used for the catalogue: `TMDB.region` ("FR").
+- Auto-refresh: cached for 1 hour in `localStorage` (per language), refreshed when the tab becomes visible again and every hour while open. Language switch reloads titles in the new language.
+- A small label under the carousel title shows the state: "Actualisé automatiquement" (live data) or "Sélection par défaut" (fallback posters). If you always see the second one, open the browser console: the reason is logged ("TMDB 401/403", blocked, timeout).
+- New quote-only offers (no invented prices): Recharge jeux mobiles (by player ID), Cartes cadeaux, Crunchyroll. Edit them in the block just before `WORKING_LOGOS`.
+- New one-line note under the steps: "for you or for someone close, ask a quote for anything else". It opens the external-purchase quote.
+- Service worker cache: `streambox-congo-v5`.
