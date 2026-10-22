@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f1120">
+  <meta name="description" content="StreamBox Congo — demandez vos abonnements numériques et payez localement par MTN ou Airtel Money.">
+  <meta property="og:title" content="StreamBox Congo — Vos abonnements, simplement">
+  <meta property="og:description" content="Streaming, musique, gaming et outils numériques avec demande de commande par WhatsApp.">
+  <meta property="og:type" content="website">
+  <title>StreamBox Congo — Vos abonnements, simplement</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='5' width='28' height='22' rx='6' fill='%230f1120' stroke='%23f2b632' stroke-width='2'/%3E%3Cpath d='M13 11.5v9l8-4.5z' fill='%23f2b632'/%3E%3Ccircle cx='25' cy='9.5' r='2' fill='%23f2b632'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#0b0d19;--surface:#131729;--surface2:#1b2035;--surface3:#252b43;--ink:#f5f2eb;--muted:#a0a7be;--line:#2b324b;--gold:#f5a623;--gold2:#ffcb68;--on-gold:#201606;--mint:#77c7a2;--red:#ff8c83;--display:"Bricolage Grotesque",system-ui,sans-serif;--body:"Figtree",system-ui,sans-serif;--radius:18px;--shadow:0 24px 70px #03040a99}
+    *,*:before,*:after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 12% 4%,#f5a6230d,transparent 38%),radial-gradient(ellipse at 92% 32%,#6855a010,transparent 30%)}
+    #led{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.72}
+    a{color:inherit}button,input{font:inherit}button{color:inherit}
+    :focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+    .wrap{width:min(1180px,calc(100% - 44px));margin:auto;position:relative;z-index:1}
+    .site-header{height:76px;position:sticky;top:0;z-index:10;display:flex;align-items:center;border-bottom:1px solid #ffffff0d;background:#0b0d19dc;backdrop-filter:blur(18px);padding:0 max(22px,calc((100vw - 1180px)/2))}
+    .header-inner{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font:800 21px/1 var(--display);letter-spacing:-.045em;white-space:nowrap}
+    .brand-mark{width:36px;height:36px;display:grid;place-items:center;border:1px solid #f5a62355;border-radius:12px;color:var(--gold);background:linear-gradient(145deg,#f5a62320,#f5a62305);box-shadow:inset 0 0 18px #f5a62312}
+    .brand-mark svg{width:21px;height:21px}
+    .brand em{font-style:normal;color:var(--gold)}
+    .navlinks{display:flex;align-items:center;gap:27px;color:var(--muted);font-size:14px}
+    .navlinks a{text-decoration:none;transition:color .2s}
+    .navlinks a:hover{color:var(--ink)}
+    .header-actions{display:flex;align-items:center;gap:12px}
+    .lang-switch{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    .lang-switch button{border:0;background:transparent;padding:7px 10px;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}
+    .lang-switch button[aria-pressed=true]{background:var(--surface3);color:var(--gold2)}
+    .contact-link{border:1px solid #ffffff19;border-radius:11px;padding:9px 13px;text-decoration:none;font-size:13px;font-weight:700;background:#ffffff08;transition:border-color .2s,background .2s}
+    .contact-link:hover{border-color:#f5a62377;background:#f5a62310}
+    .hero{min-height:454px;padding:75px 0 58px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px;position:relative}
+    .hero-copy{max-width:670px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--gold2);border:1px solid #f5a62338;background:#f5a6230b;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .eyebrow .pin{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px #f5a62399}
+    h1,h2,h3,p{margin-top:0}
+    h1{font:700 clamp(43px,6vw,74px)/.99 var(--display);letter-spacing:-.065em;margin:22px 0 20px;max-width:700px}
+    h1 span{color:var(--gold)}
+    .hero-copy>p{max-width:550px;color:#b4b8c7;font-size:17px;line-height:1.65;margin:0 0 26px}
+    .hero-cta{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+    .button-primary,.button-quiet{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;border-radius:12px;padding:0 18px;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,border-color .2s}
+    .button-primary{background:var(--gold);color:var(--on-gold);border:1px solid var(--gold);box-shadow:0 9px 30px #f5a62324}
+    .button-primary:hover{transform:translateY(-2px);background:var(--gold2)}
+    .button-quiet{background:#ffffff08;border:1px solid #ffffff1c;color:var(--ink)}
+    .button-quiet:hover{border-color:#f5a62366}
+    .button-primary svg,.button-quiet svg{width:17px;height:17px}
+    .microcopy{font-size:12px;color:var(--muted);margin:13px 0 0}
+    .hero-art{position:relative;min-height:330px;display:flex;align-items:center;justify-content:center}
+    .orbit{position:absolute;width:min(365px,90%);aspect-ratio:1;border:1px solid #f5a62320;border-radius:50%;transform:rotate(-25deg)}
+    .orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #ffffff0d;border-radius:50%;inset:30px;transform:rotate(50deg)}
+    .orbit:after{inset:65px;transform:rotate(-30deg)}
+    .screen-stack{width:255px;height:280px;position:relative;transform:rotate(5deg)}
+    .screen{position:absolute;inset:22px 4px 5px;background:linear-gradient(145deg,#292d43,#131729 65%);border:1px solid #ffffff25;border-radius:23px;box-shadow:var(--shadow);overflow:hidden}
+    .screen:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 62% 30%,#f5a62332,transparent 47%),linear-gradient(165deg,transparent 34%,#10121c 90%)}
+    .screen-head{position:absolute;left:18px;right:18px;top:17px;display:flex;justify-content:space-between;color:#d9d7d1;font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+    .screen-play{position:absolute;left:24px;bottom:64px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#211808}
+    .screen-play svg{width:17px;height:17px;margin-left:3px}
+    .screen-label{position:absolute;left:22px;bottom:25px;font:700 25px/1 var(--display);letter-spacing:-.04em}
+    .float-card{position:absolute;z-index:2;display:flex;align-items:center;gap:11px;padding:12px 14px;background:#191e30eF;border:1px solid #ffffff1a;border-radius:14px;box-shadow:0 12px 35px #0007;backdrop-filter:blur(12px)}
+    .float-card strong{display:block;font:700 13px var(--display)}
+    .float-card span{display:block;color:var(--muted);font-size:10px}
+    .float-card.one{left:-5px;top:39px}.float-card.two{right:-8px;bottom:34px}
+    .tiny-icon{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;background:#f5a62316;color:var(--gold)}
+    .tiny-icon svg{width:17px}
+    .local-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#ffffff03}
+    .local-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:17px 0}
+    .local-caption{font-size:12px;color:var(--muted)}
+    .local-points{display:flex;gap:23px;flex-wrap:wrap}
+    .local-points span{display:flex;align-items:center;gap:8px;font-size:12px;color:#d8d9df;font-weight:600}
+    .local-points i{width:5px;height:5px;background:var(--gold);border-radius:50%}
+    .section{padding:70px 0}
+    .section-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}
+    .section-kicker{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+    h2{font:700 clamp(29px,4vw,42px)/1.05 var(--display);letter-spacing:-.045em;margin:0}
+    .section-heading p{color:var(--muted);font-size:14px;max-width:390px;margin:0 0 2px}
+    .bundle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .bundle-card{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:224px;border:1px solid #f5a62335;border-radius:20px;background:linear-gradient(120deg,#211b18,#171a2b 62%,#25203b);padding:25px}
+    .bundle-card:after{content:"";position:absolute;width:270px;height:270px;right:-55px;top:-104px;border:1px solid #f5a6232a;border-radius:50%;box-shadow:0 0 0 24px #f5a62308,0 0 0 54px #f5a62305}
+    .bundle-card.secondary{border-color:#34334a;background:linear-gradient(120deg,#171c2c,#21223a)}
+    .bundle-top,.bundle-bottom{position:relative;z-index:1}
+    .bundle-tag{display:inline-flex;border-radius:999px;background:#f5a62318;color:var(--gold2);padding:5px 9px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .bundle-card h3{font:700 25px/1.1 var(--display);letter-spacing:-.04em;margin:15px 0 7px;max-width:390px}
+    .bundle-card p{font-size:13px;color:#b3b5c3;margin:0;max-width:400px}
+    .bundle-bottom{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-top:25px}
+    .bundle-price small{display:block;color:var(--muted);font-size:11px}
+    .bundle-price strong{font:700 24px var(--display);color:var(--gold2)}
+    .bundle-link{border:1px solid #ffffff28;background:#ffffff0a;border-radius:10px;padding:10px 13px;text-decoration:none;font-weight:700;font-size:12px;white-space:nowrap}
+    .bundle-link:hover{border-color:var(--gold)}
+    .catalogue{padding-top:30px}
+    .catalog-controls{display:flex;align-items:center;gap:12px;margin:27px 0 18px}
+    .search-wrap{position:relative;flex:1;max-width:340px}
+    .search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;color:#8189a1}
+    .search{width:100%;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:0 14px 0 41px;outline:none}
+    .search::placeholder{color:#7f879e}
+    .search:focus{border-color:#f5a62388}
+    .filters{display:flex;gap:8px;overflow:auto;scrollbar-width:none;padding:2px 0}
+    .filters::-webkit-scrollbar{display:none}
+    .filter{flex:none;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
+    .filter:hover{border-color:#f5a62377;color:var(--ink)}
+    .filter[aria-pressed=true]{border-color:var(--gold);background:#f5a623;color:#221707}
+    .catalog-topline{display:flex;justify-content:space-between;align-items:center;margin:18px 0 14px;color:var(--muted);font-size:12px}
+    .catalog-topline strong{color:var(--ink);font-weight:600}
+    .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+    .product-card{appearance:none;text-align:left;position:relative;display:flex;flex-direction:column;min-height:201px;padding:0;border:1px solid #ffffff12;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#171c2d,#111523);cursor:pointer;transition:transform .2s,border-color .2s,background .2s;animation:fadeUp .4s both;animation-delay:calc(var(--i,0)*35ms)}
+    .product-card:before{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),#f5a6231c,transparent 70%);transition:opacity .25s}
+    .product-card:hover{transform:translateY(-4px);border-color:#f5a62399;background:linear-gradient(145deg,#1c2235,#141827);box-shadow:0 10px 28px #0005,0 0 20px #f5a62318}
+    .product-card:hover:before{opacity:1}
+    .product-head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:17px 16px 6px}
+    .product-icon{height:39px;min-width:39px;padding:7px;display:grid;place-items:center;border-radius:12px;background:color-mix(in srgb,var(--tint) 19%,transparent);color:var(--tint);font:700 12px var(--display);overflow:hidden}
+    .product-head .product-icon{order:2;margin-left:auto;background:#0b0d19b8;border:1px solid #ffffff18;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+    .product-head .pop-tag{order:1}
+    .product-icon img{max-width:26px;max-height:26px;object-fit:contain}
+    .product-icon img.failed{display:none}
+    .logo-fallback{display:none;font:800 10px var(--display);letter-spacing:-.04em}
+    .product-icon img.failed+.logo-fallback{display:inline-block}
+    .pop-tag{border:1px solid #f5a6233d;border-radius:999px;color:var(--gold2);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 7px}
+    .product-content{position:relative;z-index:1;padding:12px 16px 16px;display:flex;flex:1;flex-direction:column}
+    .product-content h3{font:700 18px/1.1 var(--display);letter-spacing:-.03em;margin:0 0 7px}
+    .product-content p{font-size:12px;line-height:1.45;color:var(--muted);margin:0 0 17px;max-width:30ch}
+    .product-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:end;gap:6px}
+    .price-from small{display:block;color:#8991a7;font-size:10px}
+    .price-from strong{font:700 16px var(--display);color:#f3eee3}
+    .price-from em{font:400 10px var(--body);font-style:normal;color:#99a0b4}
+    .price-quote{font-size:12px;font-weight:700;color:var(--gold2)}
+    .open-arrow{height:28px;width:28px;border:1px solid #ffffff19;border-radius:9px;display:grid;place-items:center;color:#bdc1ce}
+    .open-arrow svg{width:14px}
+    .empty-state{grid-column:1/-1;border:1px dashed #353d58;border-radius:16px;padding:38px 22px;text-align:center;color:var(--muted)}
+    .empty-state strong{display:block;color:var(--ink);font:700 20px var(--display);margin-bottom:5px}
+    .loading-state{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .skeleton{height:201px;border-radius:16px;background:linear-gradient(100deg,#151a2b 25%,#20263a 40%,#151a2b 60%);background-size:200% 100%;animation:shimmer 1.2s infinite}
+    .steps-section{padding:48px 0;background:linear-gradient(90deg,#111526a8,#11152633);border-block:1px solid #ffffff0c}
+    .steps-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:45px;align-items:center}
+    .steps-intro p{color:var(--muted);font-size:14px;max-width:300px;margin:13px 0 0}
+    .steps-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:step}
+    .step{border-left:1px solid #f5a62363;padding:3px 10px 4px 16px}
+    .step b{display:block;color:var(--gold);font:700 11px var(--body);letter-spacing:.08em;margin-bottom:14px}
+    .step strong{font:700 16px var(--display);display:block;margin-bottom:5px}
+    .step span{font-size:11px;line-height:1.45;color:var(--muted)}
+    .faq-section{padding-top:74px;padding-bottom:76px}
+    .faq-layout{display:grid;grid-template-columns:.65fr 1.35fr;gap:55px}
+    .faq-intro p{color:var(--muted);font-size:14px;max-width:300px;margin-top:13px}
+    .faq-list details{border-bottom:1px solid var(--line);padding:17px 0}
+    .faq-list details:first-child{border-top:1px solid var(--line)}
+    .faq-list summary{list-style:none;display:flex;justify-content:space-between;gap:20px;align-items:center;cursor:pointer;font:600 15px var(--display)}
+    .faq-list summary::-webkit-details-marker{display:none}
+    .faq-list summary:after{content:"+";font:400 22px var(--body);color:var(--gold)}
+    .faq-list details[open] summary:after{content:"−"}
+    .faq-list p{max-width:650px;color:var(--muted);font-size:13px;margin:11px 30px 0 0}
+    .footer{border-top:1px solid var(--line);padding:25px 0 32px;color:var(--muted);font-size:11px}
+    .footer-main{display:flex;justify-content:space-between;align-items:center;gap:22px}
+    .footer-brand{display:flex;align-items:center;gap:8px;color:var(--ink);font:700 15px var(--display)}
+    .footer-brand .brand-mark{width:27px;height:27px;border-radius:9px}
+    .footer-note{max-width:620px;text-align:right}
+    .footer-note p{margin:4px 0}
+    .footer-note a{color:var(--gold2);text-decoration:none}
+    dialog{width:min(570px,calc(100% - 28px));max-height:min(92dvh,850px);padding:0;border:1px solid #ffffff1c;border-radius:21px;background:#14192a;color:var(--ink);box-shadow:var(--shadow);overflow:auto}
+    dialog[open]{animation:pop .25s ease-out}
+    dialog::backdrop{background:#03040ac9;backdrop-filter:blur(7px)}
+    .dialog-inner{padding:25px}
+    .dialog-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+    .dialog-title-group{display:flex;align-items:center;gap:13px}
+    .dialog-title-group h2{font-size:27px}
+    .dialog-desc{color:var(--muted);font-size:13px;margin:11px 42px 0 0;line-height:1.55}
+    .close-btn{flex:none;width:37px;height:37px;border-radius:11px;border:1px solid #ffffff1c;background:#ffffff08;display:grid;place-items:center;cursor:pointer;color:#d1d3dc;font-size:21px}
+    .close-btn:hover{border-color:#f5a62388;color:var(--gold)}
+    .form-label{display:flex;justify-content:space-between;align-items:center;color:#e8e7eb;font-size:12px;font-weight:700;margin:23px 0 9px}
+    .form-label small{font-size:10px;font-weight:400;color:var(--muted)}
+    .plans{display:grid;gap:8px}
+    .plan-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:1px solid #ffffff14;border-radius:12px;background:#ffffff05;padding:12px 13px;cursor:pointer;transition:border-color .18s,background .18s}
+    .plan-option:hover{border-color:#f5a62370}
+    .plan-option[aria-pressed=true]{border-color:var(--gold);background:#f5a6230d}
+    .plan-copy{flex:1;min-width:0}
+    .plan-copy strong{display:block;font-size:13px}
+    .plan-copy small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+    .plan-specs{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;margin:11px 0 0}
+    .plan-spec{display:flex;align-items:flex-start;gap:7px;color:#d4d6df;font-size:10px;line-height:1.35}
+    .plan-specs svg{width:14px;height:14px;flex:none;color:var(--gold2);margin-top:1px}
+    .plan-specs span{display:block}
+    .plan-specs b{display:block;color:#9299ad;font-size:9px;font-weight:600;margin-bottom:2px}
+    .plan-price{white-space:nowrap;color:var(--gold2);font:700 14px var(--display)}
+    .segments{display:flex;gap:8px}
+    .segments button{flex:1;min-height:43px;border:1px solid #ffffff15;border-radius:10px;background:#ffffff05;color:#d8d9e1;cursor:pointer;font-size:12px;font-weight:700}
+    .segments button small{display:block;color:#939bad;font-size:9px;font-weight:500;margin-top:2px}
+    .segments button[aria-pressed=true]{border-color:var(--gold);color:var(--gold2);background:#f5a6230d}
+    .payment-options button{display:flex;justify-content:center;align-items:center;gap:7px}
+    .payment-dot{width:8px;height:8px;border-radius:50%;background:var(--mint)}
+    .payment-options button[data-op="Airtel"] .payment-dot{background:#f46d74}
+    .quote-panel{padding:17px;border:1px solid #f5a62335;border-radius:13px;background:#f5a62309;color:#c9cbd5;font-size:12px;line-height:1.55;margin-top:18px}
+    .quote-panel strong{display:block;color:var(--gold2);font-size:13px;margin-bottom:5px}
+    .quote-panel .button-primary{margin-top:14px;min-height:42px;font-size:12px}
+    .payment-explain{margin:17px 0 0;padding:13px;border:1px solid #ffffff0d;border-radius:12px;background:#090c16;color:#aeb3c1;font-size:11px;line-height:1.55}
+    .ticket{margin-top:12px;border:1px dashed #39415c;border-radius:12px;background:#0c0f1b;padding:12px 13px;color:#aeb3c1;font:11px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+    .total-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px}
+    .total-row span{color:#c5c8d2;font-size:12px}
+    .total-row strong{font:700 27px var(--display);color:var(--gold2)}
+    .discount-hint{font-size:10px;color:var(--mint);margin-top:-5px;margin-bottom:14px}
+    .order-button{width:100%;border:0;min-height:49px;border-radius:12px;background:var(--gold);color:#211707;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer;transition:background .2s,transform .2s}
+    .order-button:hover{background:var(--gold2);transform:translateY(-1px)}
+    .product-card:active,.button-primary:active,.order-button:active,.bundle-link:active{transform:scale(.985)}
+    .order-button svg{width:17px}
+    .modal-legal{text-align:center;color:#8f96aa;font-size:10px;line-height:1.5;margin:11px 8px 0}
+    .toast{position:fixed;z-index:30;right:20px;bottom:20px;background:#21283b;border:1px solid #f5a62365;border-radius:12px;padding:12px 15px;color:var(--ink);font-size:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .2s,transform .2s}
+    .toast.show{opacity:1;transform:translateY(0)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(11px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes shimmer{to{background-position:-200% 0}}
+    @media(max-width:900px){.hero{grid-template-columns:1fr .7fr;gap:18px;padding-top:58px}.hero-art{transform:scale(.88)}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.navlinks{gap:16px}.bundle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bundle-card:last-child{grid-column:1/-1}}
+    @media(max-width:700px){.wrap{width:min(100% - 32px,560px)}.site-header{height:65px;padding:0 16px}.navlinks{display:none}.header-inner{gap:10px}.brand{font-size:19px}.contact-link{display:none}.hero{display:block;min-height:0;padding:54px 0 39px}.hero-copy{position:relative;z-index:2}.hero-copy>p{font-size:15px;max-width:470px}.hero-art{min-height:254px;margin-top:15px;transform:none}.screen-stack{transform:rotate(3deg) scale(.83)}.float-card.one{left:4%;top:27px}.float-card.two{right:2%;bottom:14px}.local-inner{display:block;padding:14px 0}.local-caption{margin-bottom:9px}.local-points{gap:12px 18px}.local-points span{font-size:11px}.section{padding:55px 0}.section-heading{display:block}.section-heading p{margin-top:10px}.bundle-grid{grid-template-columns:1fr}.bundle-card:last-child{grid-column:auto}.bundle-card{min-height:200px;padding:21px}.catalogue{padding-top:20px}.catalog-controls{display:block;margin-top:20px}.search-wrap{max-width:none;margin-bottom:12px}.filters{margin-right:-16px;padding-right:16px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-card{min-height:190px}.product-head{padding:13px 12px 4px}.product-content{padding:10px 12px 13px}.product-content h3{font-size:16px}.product-content p{font-size:11px;margin-bottom:12px}.product-icon{height:35px;min-width:35px}.steps-section{padding:39px 0}.steps-layout,.faq-layout{grid-template-columns:1fr;gap:23px}.steps-list{gap:8px}.step{padding-left:11px}.step strong{font-size:14px}.step span{font-size:10px}.faq-section{padding:56px 0}.footer-main{align-items:flex-start;flex-direction:column}.footer-note{text-align:left}.dialog-inner{padding:20px}.dialog-desc{margin-right:0}}
+    @media(max-width:450px){.plan-specs{grid-template-columns:1fr}}
+    @media(max-width:390px){.wrap{width:calc(100% - 26px)}.hero-cta{align-items:stretch}.hero-cta .button-primary,.hero-cta .button-quiet{flex:1;font-size:12px;padding:0 11px}.local-points{gap:9px}.product-grid{gap:8px}.product-card{min-height:186px}.product-content h3{font-size:15px}.price-from strong{font-size:14px}.open-arrow{width:25px;height:25px}.steps-list{grid-template-columns:1fr}.step{display:grid;grid-template-columns:35px 1fr;align-items:start}.step b{grid-row:span 2;margin:4px 0}.step strong{margin-bottom:2px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    /* StreamBox (1) visual language */
+    :root{--bg:#0F1120;--surface:#1A1E33;--surface2:#252A45;--surface3:#252A45;--ink:#F2EFE8;--muted:#A3A9C2;--line:#2E3452;--gold:#F2B632;--gold2:#FFD46F;--on-gold:#1A1405;--radius:14px}
+    html{scroll-padding-top:76px}
+    body{background:var(--bg)}
+    body:before{background:radial-gradient(ellipse at 12% 4%,#f2b6320a,transparent 38%),radial-gradient(ellipse at 92% 32%,#7c5cff0c,transparent 30%)}
+    .wrap{width:min(1000px,calc(100% - 32px))}
+    .site-header{height:auto;min-height:60px;overflow:visible;border:0;padding:10px 16px;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    .header-inner{max-width:1000px;margin:0 auto;gap:14px}
+    .brand{font-size:21px;letter-spacing:0}
+    .brand-mark{width:32px;height:32px;border:0;border-radius:0;background:none;box-shadow:none;color:var(--gold)}
+    .brand-mark svg{width:32px;height:32px}
+    .brand-mark .brand-box{fill:none;stroke:currentColor;stroke-width:2.4}
+    .brand-mark .brand-play{fill:var(--ink)}
+    .brand-mark .brand-led{fill:var(--gold);filter:drop-shadow(0 0 4px var(--gold));animation:brandLed 2.4s ease-in-out infinite}
+    @keyframes brandLed{50%{opacity:.45}}
+    .navlinks{display:none}
+    .header-actions{gap:10px}
+    .contact-link{padding:7px 10px;border-radius:8px;font-size:12px}
+    .lang-switch{border-radius:8px}
+    .lang-switch button{padding:6px 10px;font-size:13px}
+    .lang-switch button[aria-pressed=true]{background:var(--gold);color:var(--on-gold)}
+    .system-status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;white-space:nowrap}
+    .system-status i{width:7px;height:7px;border-radius:50%;background:#55d68b;box-shadow:0 0 10px #55d68b;animation:statusBlink 1.8s ease-in-out infinite}
+    @keyframes statusBlink{50%{opacity:.45}}
+    .hw{position:absolute;left:0;right:0;bottom:-8px;height:16px;overflow:hidden;pointer-events:none;z-index:2}
+    .hw svg{position:absolute;left:0;top:0;width:200%;height:16px;fill:none;animation:wv 10s linear infinite}
+    .hw path{vector-effect:non-scaling-stroke;stroke-width:2;stroke:var(--gold);filter:drop-shadow(0 0 4px var(--gold))}
+    .hw .wave-b{animation-duration:16s;animation-direction:reverse}
+    .hw .wave-b path{stroke:#7C5CFF;opacity:.8}
+    @keyframes wv{to{transform:translateX(-50%)}}
+    .trust-marquee{position:relative;z-index:1;overflow:hidden;border-block:1px solid #2e345277;background:#1a1e3388}
+    .trust-track{display:flex;width:max-content;align-items:center;gap:34px;padding:9px 0;color:#d4d6e0;font-size:12px;font-weight:600;white-space:nowrap;animation:trustScroll 34s linear infinite}
+    .trust-track span{display:flex;align-items:center;gap:9px}
+    .trust-track span:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+    .trust-marquee:hover .trust-track{animation-play-state:paused}
+    @keyframes trustScroll{to{transform:translateX(-50%)}}
+    .hero{display:block;width:100%;min-height:0;padding:36px 16px 36px;background:radial-gradient(520px 260px at 15% 0,#f2b6321c,transparent),radial-gradient(480px 280px at 92% 25%,#7c5cff20,transparent)}
+    .hero-copy{max-width:1000px;margin:0 auto}
+    .eyebrow{margin-bottom:14px;color:var(--gold2);font-size:11px}
+    h1{max-width:660px;font-size:clamp(34px,7vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.08;background:linear-gradient(95deg,var(--ink) 30%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+    h1 span{color:inherit}
+    .hero-copy>p{max-width:52ch;color:var(--muted);font-size:16px;margin:14px 0 0}
+    .hero-cta,.hero-art,.microcopy{display:none}
+    .local-strip{display:none}
+    .section{padding:24px 0 18px}
+    .section-heading{display:block;margin-bottom:14px}
+    .section-kicker{font-size:11px;letter-spacing:.1em;margin-bottom:6px}
+    h2{font-size:clamp(25px,4vw,32px);letter-spacing:-.025em}
+    .section-heading p{max-width:60ch;margin-top:8px;font-size:13px}
+    .catalogue{padding-top:8px}
+    .catalog-controls{display:block;margin:14px 0 10px}
+    .search-wrap{display:block;max-width:360px;margin-bottom:10px}
+    .filters{padding:6px 0 10px}
+    .filter{background:var(--surface);color:var(--ink);padding:8px 15px;font:600 13px var(--body)}
+    .filter[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+    .catalog-topline{margin:4px 0 10px;font-size:12px}
+    .product-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+    .product-card{min-height:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);animation:fadeUp .45s both;animation-delay:calc(var(--i,0)*45ms);transform-style:preserve-3d;transition:transform .25s,box-shadow .25s,border-color .25s}
+    .product-card:before{inset:0;border-radius:inherit;background:radial-gradient(200px circle at var(--mx,50%) var(--my,50%),#f2b63238,transparent 70%)}
+    .product-card:hover{transform:perspective(900px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg)) translateY(-3px);border-color:var(--gold);box-shadow:0 0 22px #f2b63235}
+    .product-head{height:124px;flex:none;display:block;padding:0;overflow:hidden;background:linear-gradient(150deg,var(--tint),var(--surface2))}
+    .product-head:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 40%,#080a14a8)}
+    .product-tile-title{position:absolute;z-index:1;left:12px;right:94px;bottom:11px;color:#fff;font:800 19px/1.05 var(--display);letter-spacing:-.025em;text-shadow:0 2px 8px #0008}
+    .product-head .product-icon{position:absolute;z-index:2;top:10px;right:10px;order:0;margin:0;width:78px;max-width:calc(100% - 20px);height:39px;min-width:0;padding:5px 7px;border:1px solid #ffffffc7;border-radius:7px;background:#ffffffef;color:#151623;backdrop-filter:none;overflow:hidden}
+    .product-icon img{display:block;max-width:100%;max-height:29px;width:auto;height:auto;object-fit:contain}
+    .product-icon .logo-fallback{display:none;font:800 11px var(--display);letter-spacing:-.02em;color:#171827;white-space:nowrap}
+    .product-icon .text-logo{display:inline-block;font:800 11px var(--display);letter-spacing:-.02em;color:#171827;white-space:nowrap}
+    .product-head .product-icon:has(img.logo-prime){background:#111421;border-color:#ffffff38}
+    .product-head .product-icon img.logo-prime{width:68px;height:20px;max-width:100%;max-height:24px;object-fit:contain}
+    .product-head .product-icon img.logo-canva{width:27px;height:27px;max-width:none;max-height:none;object-fit:contain}
+    .product-icon img.failed+.logo-fallback{display:inline-block}
+    .product-head .pop-tag{position:absolute;z-index:2;left:9px;top:9px;order:0;padding:3px 7px;background:#0f1120cc;border-color:#ffffff2c;color:#fff;font-size:9px}
+    .product-content{padding:11px 12px 12px}
+    .product-content h3{display:none}
+    .product-content p{min-height:34px;max-width:none;font-size:11px;margin:0 0 11px}
+    .price-from small{font-size:10px}
+    .price-from strong{font-size:15px}
+    .price-from em{font-size:10px}
+    .open-arrow{width:27px;height:27px}
+    .bundle-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+    .bundle-card{min-height:190px;padding:18px;border-radius:14px}
+    .bundle-card h3{font-size:22px}
+    .bundle-price strong{font-size:21px}
+    .steps-section{padding:19px 0 22px;background:transparent;border:0}
+    .steps-layout{display:block}
+    .steps-intro{display:none}
+    .steps-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .step{border:0;padding:0;display:flex;align-items:center;gap:9px}
+    .step b{width:28px;height:28px;flex:none;display:grid;place-items:center;margin:0;border-radius:50%;background:var(--surface2);box-shadow:0 0 12px #f2b63245;color:var(--gold);font-size:12px}
+    .step strong{margin:0;font-size:13px}
+    .step span{display:none}
+    .faq-section{padding-top:46px;padding-bottom:48px}
+    .faq-layout{grid-template-columns:1fr;gap:15px}
+    .faq-intro p{margin-top:8px}
+    .footer{margin-top:10px}
+    .account-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .account-choice button{min-height:104px;text-align:left;border:2px solid transparent;border-radius:12px;padding:10px 12px;background:var(--surface2);color:var(--ink);cursor:pointer}
+    .account-choice button[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 16px #f2b63240}
+    .account-choice strong{display:block;font-size:13px;line-height:1.25}
+    .account-choice small{display:block;margin-top:5px;color:var(--muted);font-size:11px;line-height:1.4;font-weight:400}
+    .order-detail-label{display:block;margin-top:12px;color:var(--ink);font-size:12px;font-weight:700}
+    .order-detail{display:block;width:100%;min-height:42px;margin-top:6px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);padding:10px 12px;font:400 13px var(--body)}
+    .order-detail-hint{display:block;margin-top:5px;color:var(--muted);font-size:10px;line-height:1.45}
+    @media(max-width:760px){.system-status{display:none}.hero{padding:30px 16px 27px}.site-header{min-height:56px}.steps-list{gap:7px}.step{gap:7px}.step strong{font-size:12px}}
+    @media(max-width:520px){.wrap{width:calc(100% - 26px)}.header-inner{gap:8px}.brand{font-size:18px;gap:7px}.brand-mark,.brand-mark svg{width:29px;height:29px}.contact-link{font-size:11px;padding:6px 8px}.lang-switch button{padding:6px 8px;font-size:12px}.hero{padding:26px 13px 24px}.hero-copy>p{font-size:14px}.trust-track{font-size:11px;gap:22px;animation-duration:27s}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product-head{height:112px}.product-content{padding:10px}.product-content p{font-size:10px;min-height:39px}.product-tile-title{font-size:17px;right:83px}.product-head .product-icon{width:70px;height:35px;right:8px;top:8px}.product-icon img{max-height:26px}.steps-list{grid-template-columns:1fr}.step{display:flex}.step strong{font-size:13px}.account-choice{grid-template-columns:1fr}.account-choice button{min-height:0}.dialog-inner{padding:18px}.plan-specs{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){.trust-track,.system-status i,.brand-mark .brand-led{animation:none!important}.product-card:hover{transform:translateY(-2px)}}
+  </style>
+</head>
+<body>
+  <canvas id="led" aria-hidden="true"></canvas>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="StreamBox Congo, accueil">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><rect class="brand-box" x="2" y="5" width="28" height="22" rx="6"/><path class="brand-play" d="M13 11.5v9l8-4.5z"/><circle class="brand-led" cx="25" cy="9.5" r="2"/></svg></span>
+        <span>StreamBox <em>Congo</em></span>
+      </a>
+      <span class="system-status"><i aria-hidden="true"></i><span data-i18n="systemStatus">Système actif · demandes 7j/7</span></span>
+      <nav class="navlinks" aria-label="Navigation principale">
+        <a href="#catalogue" data-i18n="navCatalog">Catalogue</a><a href="#how" data-i18n="navHow">Comment ça marche</a><a href="#faq" data-i18n="navFaq">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <a class="contact-link" id="contactLink" target="_blank" rel="noopener noreferrer" href="#" data-i18n="contact">Parler à l’équipe ↗</a>
+        <div class="lang-switch" aria-label="Language">
+          <button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+    <div class="hw" aria-hidden="true"><svg viewBox="0 0 2880 16" preserveAspectRatio="none"><path d="M0 8Q180 0 360 8T720 8T1080 8T1440 8T1800 8T2160 8T2520 8T2880 8"/></svg><svg class="wave-b" viewBox="0 0 2880 16" preserveAspectRatio="none"><path d="M0 8Q180 16 360 8T720 8T1080 8T1440 8T1800 8T2160 8T2520 8T2880 8"/></svg></div>
+  </header>
+  <div class="trust-marquee" aria-label="Informations utiles"><div class="trust-track" id="trustTrack"></div></div>
+  <main id="top">
+    <section class="wrap hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="eyebrow"><i class="pin"></i><span data-i18n="eyebrow">Fait pour le quotidien au Congo</span></span>
+        <h1 id="heroTitle" data-i18n-html="heroTitle">Vos abonnements.<br><span>Votre façon de payer.</span></h1>
+        <p data-i18n="heroSub">Streaming, musique, gaming et outils numériques — choisissez une formule, puis faites votre demande avec MTN ou Airtel Money sur WhatsApp.</p>
+        <div class="hero-cta">
+          <a class="button-primary" href="#catalogue"><span data-i18n="browse">Explorer le catalogue</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="button-quiet" href="#how"><span data-i18n="stepsLink">Voir les étapes</span></a>
+        </div>
+        <p class="microcopy" data-i18n="heroNote">Demande par WhatsApp · paiement confirmé manuellement · tarifs estimatifs</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="screen-stack"><div class="screen"><div class="screen-head"><span>STREAMBOX / CONGO</span><span>01—12</span></div><div class="screen-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="screen-label">Tonight,<br>your choice.</div></div></div>
+        <div class="float-card one"><i class="tiny-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8h14M5 16h14"/></svg></i><div><strong>MTN / Airtel</strong><span data-i18n="mobileMoney">Mobile Money local</span></div></div>
+        <div class="float-card two"><i class="tiny-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.6-.85L4 20l1.85-4.9A7.5 7.5 0 1 1 20 11.5Z"/><path d="M9 10h.01M15 10h.01M9 14h6"/></svg></i><div><strong>WhatsApp</strong><span data-i18n="orderRequest">Votre demande, prête à envoyer</span></div></div>
+      </div>
+    </section>
+    <section class="steps-section" id="how">
+      <div class="wrap steps-layout">
+        <div class="steps-intro"><div class="section-kicker" data-i18n="howKicker">Simple, sans détour</div><h2 data-i18n="howTitle">Une demande en trois étapes.</h2><p data-i18n="howIntro">Le site prépare votre demande. La confirmation et le paiement se font ensuite directement avec le vendeur.</p></div>
+        <div class="steps-list" id="stepsList"></div>
+      </div>
+    </section>
+    <section class="wrap section catalogue" id="catalogue">
+      <div class="section-heading"><div><div class="section-kicker" data-i18n="catalogKicker">Le catalogue</div><h2 data-i18n="catalogTitle">Trouvez votre prochain accès.</h2></div><p data-i18n="catalogSub">Les offres et prix affichés sont indicatifs. Le montant final est confirmé dans WhatsApp avant tout transfert.</p></div>
+      <div class="catalog-controls">
+        <label class="search-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input class="search" type="search" id="search" placeholder="Rechercher un service…" aria-label="Rechercher un service" autocomplete="off"></label>
+        <nav class="filters" id="filters" aria-label="Catégories"></nav>
+      </div>
+      <div class="catalog-topline"><strong id="resultsLabel"></strong><span data-i18n="catalogHint">Choisissez une carte pour voir les formules</span></div>
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+    </section>
+    <section class="wrap section" id="bundles">
+      <div class="section-heading"><div><div class="section-kicker" data-i18n="bundleKicker">Les packs</div><h2 data-i18n="bundleTitle">Deux offres groupées.</h2></div><p data-i18n="bundleSub">Des prix estimatifs à confirmer sur WhatsApp avant tout transfert.</p></div>
+      <div class="bundle-grid" id="bundleGrid"></div>
+    </section>
+    <section class="wrap faq-section" id="faq">
+      <div class="faq-layout"><div class="faq-intro"><div class="section-kicker" data-i18n="faqKicker">À savoir avant de choisir</div><h2 data-i18n="faqTitle">Les réponses, sans détour.</h2><p data-i18n="faqIntro">Le parcours est conçu pour être clair avant qu’un paiement soit envisagé.</p></div><div class="faq-list" id="faqList"></div></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap footer-main"><div class="footer-brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="4" width="19" height="16" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="m10 8 6 4-6 4V8Z" fill="currentColor"/></svg></span>StreamBox Congo</div><div class="footer-note"><p data-i18n="legal">Service indépendant, non affilié aux marques citées. Les tarifs sont des estimations à confirmer avant paiement.</p><p><span data-i18n="footerContact">Une question ?</span> <a id="footerContact" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a></p></div></div></footer>
+  <dialog id="orderDialog" aria-labelledby="dialogTitle"></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+  /* ================= MERCHANT SETTINGS — edit values here =================
+     WhatsApp contact, catalogue details, and duration reductions.
+     FCFA_PRICES below contains the displayed local price points.
+  ========================================================================== */
+  const STORE = {
+    brand: "StreamBox Congo",
+    whatsapp: "242064131363", // international digits only; no plus sign
+    usdToFcfa: 580,
+    durationDiscount: { 1: 0, 3: 0.08, 6: 0.15 },
+    bundleDiscount: 0.05,
+    products: [
+      {id:"netflix", name:"Netflix", category:"video", tint:"#e64b58", logo:"https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", popular:true, description:{fr:"Films et séries. Choisissez une formule selon l’offre disponible.",en:"Films and series. Choose a plan based on the available offer."}, plans:[{name:{fr:"Écran Solo",en:"Solo screen"},usd:3.5,detail:{fr:"Offre estimative — modalités exactes à confirmer.",en:"Estimated offer — confirm exact terms."},specs:{quality:{fr:"Full HD",en:"Full HD"},devices:{fr:"1 personne ; nombre d’écrans à confirmer.",en:"1 person; confirm exact screen count."}}},{name:{fr:"Compte complet 4K",en:"Full account 4K"},usd:9.5,detail:{fr:"Formule 4K selon disponibilité — à confirmer.",en:"4K plan subject to availability — confirm first."},specs:{quality:{fr:"4K Ultra HD",en:"4K Ultra HD"},devices:{fr:"Jusqu’à 4 écrans selon l’offre.",en:"Up to 4 screens, subject to offer."}}}]},
+      {id:"prime",name:"Prime Video",category:"video",tint:"#53a9d9",logo:"https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo_%282024%29.svg",description:{fr:"Le service vidéo Prime Video, selon disponibilité.",en:"Prime Video streaming, subject to availability."},plans:[{name:{fr:"Accès mensuel",en:"Monthly access"},usd:3,detail:{fr:"Offre estimative — détails à confirmer.",en:"Estimated offer — details to confirm."},specs:{quality:{fr:"Haute définition annoncée dans l’offre.",en:"High definition stated in the offer."},devices:{fr:"TV, ordinateur ou mobile ; quantité à confirmer.",en:"TV, computer or mobile; exact count to confirm."}}}]},
+      {id:"disney",name:"Disney+",category:"video",tint:"#668de7",logo:"https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg",description:{fr:"Films et séries Disney+ — disponibilité à confirmer.",en:"Disney+ films and series — availability to confirm."},plans:[{name:{fr:"Accès mensuel",en:"Monthly access"},usd:3.5,detail:{fr:"Offre estimative — détails à confirmer.",en:"Estimated offer — details to confirm."},specs:{quality:{fr:"Qualité selon la formule confirmée.",en:"Quality depends on the confirmed plan."},devices:{fr:"Multi-écrans annoncé ; nombre à confirmer.",en:"Multi-screen stated; confirm exact count."}}}]},
+      {id:"spotify",name:"Spotify",category:"music",tint:"#45bd85",logo:"https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text_%282015%29.svg",popular:true,description:{fr:"Musique en streaming. Formule Individuel estimative.",en:"Music streaming. Estimated Individual plan."},plans:[{name:{fr:"Individuel",en:"Individual"},usd:2.5,detail:{fr:"Écoute sans publicité et hors ligne selon l’offre confirmée.",en:"Ad-free and offline listening, subject to the confirmed offer."},specs:{quality:{fr:"Qualité audio selon l’offre.",en:"Audio quality depends on the offer."},devices:{fr:"1 compte individuel.",en:"1 individual account."}}}]},
+      {id:"youtube",name:"YouTube Premium",category:"video",tint:"#ff6859",logo:"https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg",popular:true,description:{fr:"YouTube Premium, selon l’offre disponible.",en:"YouTube Premium, subject to available offer."},plans:[{name:{fr:"Individuel",en:"Individual"},usd:3,detail:{fr:"Sans publicité, lecture en arrière-plan et YouTube Music selon l’offre confirmée.",en:"Ad-free, background playback and YouTube Music, subject to the confirmed offer."},specs:{quality:{fr:"Résolution vidéo selon la formule.",en:"Video resolution depends on the plan."},devices:{fr:"Compte individuel ; nombre d’appareils à confirmer.",en:"Individual account; confirm device count."}}}]},
+      {id:"applemusic",name:"Apple Music",category:"music",tint:"#ed526a",logo:"https://upload.wikimedia.org/wikipedia/commons/5/5a/Apple_Music_Logo.svg",description:{fr:"Abonnement Apple Music, formule indicative.",en:"Apple Music subscription, estimated plan."},plans:[{name:{fr:"Individuel",en:"Individual"},usd:3,detail:{fr:"Audio Lossless et écoute hors ligne selon l’offre à confirmer.",en:"Lossless audio and offline listening subject to confirmation."},specs:{quality:{fr:"Audio Lossless annoncé — à confirmer.",en:"Lossless audio stated — confirm first."},devices:{fr:"1 compte individuel ; appareils à confirmer.",en:"1 individual account; confirm devices."}}}]},
+      {id:"psplus",name:"PlayStation Plus",category:"gaming",tint:"#6b92ed",logo:"https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg",description:{fr:"Formules PlayStation Plus — confirmez le niveau avant paiement.",en:"PlayStation Plus plans — confirm the tier before payment."},plans:[{name:{fr:"Essential",en:"Essential"},usd:6,detail:{fr:"Jeu en ligne, jeux mensuels et sauvegardes cloud selon l’offre.",en:"Online play, monthly games and cloud saves, subject to offer."},specs:{quality:{fr:"Fonctions de jeu — pas de résolution vidéo indiquée.",en:"Gaming features; no video resolution specified."},devices:{fr:"Console PlayStation ; génération et disponibilité à confirmer.",en:"PlayStation console; confirm generation and availability."}}},{name:{fr:"Extra",en:"Extra"},usd:9.5,detail:{fr:"Catalogue de jeux PS4/PS5 selon l’offre confirmée.",en:"PS4/PS5 game catalogue, subject to the confirmed offer."},specs:{quality:{fr:"Téléchargement de jeux — contenu à confirmer.",en:"Downloadable games; confirm catalogue."},devices:{fr:"Console PlayStation ; génération à confirmer.",en:"PlayStation console; confirm generation."}}}]},
+      {id:"xbox",name:"Xbox Game Pass",category:"gaming",tint:"#68bd7a",logo:"https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg",description:{fr:"Xbox Game Pass — niveau à confirmer avec le vendeur.",en:"Xbox Game Pass — confirm tier with the seller."},plans:[{name:{fr:"Ultimate",en:"Ultimate"},usd:8.5,detail:{fr:"Cloud gaming, multijoueur et jeux récents selon l’offre confirmée.",en:"Cloud gaming, multiplayer and recent games, subject to the confirmed offer."},specs:{quality:{fr:"Cloud gaming ; qualité selon appareil et connexion.",en:"Cloud gaming; quality depends on device and connection."},devices:{fr:"Xbox ou PC selon l’offre.",en:"Xbox or PC, subject to the offer."}}}]},
+      {id:"chatgpt",name:"ChatGPT Plus",category:"tools",tint:"#7ec4a2",logo:"https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",popular:true,description:{fr:"Demande pour une formule ChatGPT Plus.",en:"Request for a ChatGPT Plus plan."},plans:[{name:{fr:"Plus",en:"Plus"},usd:12,detail:{fr:"Fonctionnalités et limites selon l’offre confirmée.",en:"Features and limits depend on the confirmed offer."},specs:{quality:{fr:"Service numérique ; pas de résolution vidéo.",en:"Digital service; no video resolution."},devices:{fr:"Web ou application ; limites d’appareils à confirmer.",en:"Web or app; confirm device limits."}}}]},
+      {id:"canva",name:"Canva Pro",category:"tools",tint:"#8a7be0",logo:"https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg",description:{fr:"Demande Canva Pro — modalités à confirmer.",en:"Canva Pro request — terms to confirm."},plans:[{name:{fr:"Pro",en:"Pro"},usd:4.5,detail:{fr:"Outils et modèles premium selon l’offre confirmée.",en:"Premium tools and templates, subject to the confirmed offer."},specs:{quality:{fr:"Outils de création — résolution selon le contenu exporté.",en:"Creative tools; resolution depends on exported content."},devices:{fr:"Web ou application ; appareils à confirmer.",en:"Web or app; confirm device count."}}}]},
+      {id:"iptv",name:"IPTV",category:"other",tint:"#dfa947",icon:"TV",quote:true,description:{fr:"Demandez un devis IPTV. Précisez le type d’écran et le service souhaité dans WhatsApp.",en:"Request an IPTV quote. Tell us your screen type and preferred service in WhatsApp."},plans:[]},
+      {id:"vpn",name:"VPN",category:"other",tint:"#53a6bd",icon:"VPN",quote:true,description:{fr:"Demandez un devis VPN. Nous confirmerons les options disponibles avant paiement.",en:"Request a VPN quote. We will confirm available options before payment."},plans:[]},
+      {id:"cinema-music",name:{fr:"Pack Ciné + Musique",en:"Cinema + Music bundle"},category:"bundle",tint:"#e4a847",icon:"SB",popular:true,bundle:true,description:{fr:"Netflix Compte complet 4K + Spotify Individuel. Réduction pack configurée à 5% sur la somme des deux prix estimatifs.",en:"Netflix Full account 4K + Spotify Individual. A configured 5% bundle reduction applies to the sum of both estimates."},plans:[{name:{fr:"Netflix 4K + Spotify Individuel",en:"Netflix 4K + Spotify Individual"},components:[["netflix",1],["spotify",0]],detail:{fr:"Deux services — offres, modalités et disponibilité à confirmer.",en:"Two services — offers, terms and availability to confirm."}}]},
+      {id:"study-creative",name:{fr:"Pack Étudiant & Création",en:"Study & Create bundle"},category:"bundle",tint:"#85a9a4",icon:"SB",popular:false,bundle:true,discount:0,description:{fr:"ChatGPT Plus + Canva Pro. Prix calculé à partir de la somme des tarifs estimatifs.",en:"ChatGPT Plus + Canva Pro. Price calculated from the sum of estimated prices."},plans:[{name:{fr:"ChatGPT Plus + Canva Pro",en:"ChatGPT Plus + Canva Pro"},components:[["chatgpt",0],["canva",0]],detail:{fr:"Deux services — offres, modalités et disponibilité à confirmer.",en:"Two services — offers, terms and availability to confirm."}}]},
+      {id:"gamer-console",name:{fr:"Pack Gamer Console",en:"Console Gamer Bundle"},category:"bundle",tint:"#6b82e8",icon:"GX",bundle:true,quote:true,quotePrompt:{fr:"PlayStation Plus ou Xbox Game Pass avec une option IPTV ou streaming.",en:"PlayStation Plus or Xbox Game Pass with an IPTV or streaming option."},description:{fr:"Associez PlayStation Plus ou Xbox Game Pass à une option IPTV/streaming. Disponibilité, formule et tarif à confirmer sur WhatsApp.",en:"Pair PlayStation Plus or Xbox Game Pass with an IPTV/streaming option. Confirm availability, plan and price on WhatsApp."},plans:[]}
+    ]
+  };
+  /* Congo-Brazzaville catalogue: user-provided FCFA prices, rounded to 500. */
+  const FCFA_PRICES = {
+    netflix:[3500,9500],prime:[3000],disney:[3500],spotify:[2500],youtube:[3000],
+    psplus:[6500,10000],xbox:[8500],chatgpt:[12000],canva:[3500,10000],
+    "cinema-music":[5500],"pack-master":[8000]
+  };
+  STORE.durationDiscount[12]=0;
+  const appleMusic=STORE.products.find(p=>p.id==="applemusic");
+  appleMusic.quote=true;
+  appleMusic.plans=[];
+  const canva=STORE.products.find(p=>p.id==="canva");
+  canva.plans.push({name:{fr:"Pro · 1 an",en:"Pro · 1 year"},periodMonths:12,detail:{fr:"12 mois complets. Offre et disponibilité à confirmer.",en:"12 full months. Confirm the offer and availability."},specs:{quality:{fr:"Outils premium selon l’offre confirmée.",en:"Premium tools, subject to the confirmed offer."},devices:{fr:"Web ou application ; appareils à confirmer.",en:"Web or app; confirm device count."}}});
+  const duo=STORE.products.find(p=>p.id==="cinema-music");
+  duo.name={fr:"Pack Duo",en:"Duo bundle"};
+  duo.description={fr:"Netflix Écran Solo + Spotify Individuel. Prix indicatif du pack : 5 500 FCFA.",en:"Netflix Solo screen + Spotify Individual. Indicative bundle price: 5,500 FCFA."};
+  duo.plans[0].name={fr:"Netflix Solo + Spotify Individuel",en:"Netflix Solo + Spotify Individual"};
+  duo.plans[0].components=[["netflix",0],["spotify",0]];
+  STORE.products.push(
+    {id:"pack-master",name:{fr:"Pack Master",en:"Master bundle"},category:"bundle",tint:"#7C5CFF",icon:"SB",popular:true,bundle:true,description:{fr:"Netflix Solo + YouTube Premium + Spotify. Prix indicatif : 8 000 FCFA.",en:"Netflix Solo + YouTube Premium + Spotify. Indicative price: 8,000 FCFA."},plans:[{name:{fr:"Netflix + YouTube + Spotify",en:"Netflix + YouTube + Spotify"},detail:{fr:"Trois services réunis dans un seul pack. Offres à confirmer.",en:"Three services in one bundle. Confirm availability."},components:[["netflix",0],["youtube",0],["spotify",0]]}]},
+    {id:"external",name:{fr:"Achat externe & conciergerie",en:"External purchase & concierge"},category:"other",tint:"#dfa947",icon:"↗",quote:true,description:{fr:"Alibaba, AliExpress, jeux ou formations : décrivez votre achat et demandez un devis.",en:"Alibaba, AliExpress, games or courses: describe what you need and request a quote."},plans:[]}
+  );
+  const WORKING_LOGOS={
+    prime:"https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png",
+    spotify:"https://cdn.simpleicons.org/spotify/1DB954",
+    applemusic:"https://cdn.simpleicons.org/applemusic/FA243C",
+    canva:"https://www.canva.com/favicon.ico"
+  };
+  STORE.products.forEach(item=>{if(WORKING_LOGOS[item.id])item.logo=WORKING_LOGOS[item.id];});
+  const TEXT = {
+    fr:{
+      navCatalog:"Catalogue",navHow:"Comment ça marche",navFaq:"FAQ",contact:"Parler à l’équipe ↗",eyebrow:"Fait pour le quotidien au Congo",
+      heroTitle:'Vos abonnements.<br><span>Votre façon de payer.</span>',heroSub:"Streaming, musique, gaming et outils numériques — choisissez une formule, puis faites votre demande avec MTN ou Airtel Money sur WhatsApp.",browse:"Explorer le catalogue",stepsLink:"Voir les étapes",heroNote:"Demande par WhatsApp · paiement confirmé manuellement · tarifs estimatifs",mobileMoney:"Mobile Money local",orderRequest:"Votre demande, prête à envoyer",
+      localCaption:"Pensé pour Brazzaville, Pointe-Noire et la zone CEMAC.",localPoint1:"Pas de carte bancaire requise",localPoint2:"MTN ou Airtel Money",localPoint3:"Montant confirmé avant paiement",
+      bundleKicker:"Les combinaisons utiles",bundleTitle:"Trois packs. Une demande.",bundleSub:"Des options estimatives ou sur devis, confirmées sur WhatsApp.",bundleBadge:"PACK • 5% DE RÉDUCTION",bundleOneTitle:"Pack Ciné + Musique",bundleOneDesc:"Netflix 4K + Spotify Individuel. Un panier combiné, un seul échange WhatsApp.",bundleOnePrice:"Estimation mensuelle",bundleSecondBadge:"PACK • 2 SERVICES",bundleSecondTitle:"Pack Étudiant & Création",bundleSecondDesc:"ChatGPT Plus + Canva Pro. Une combinaison orientée études et création, à confirmer selon disponibilité.",bundleSecondPrice:"Estimation mensuelle",bundleThirdBadge:"DEVIS À CONFIRMER",bundleThirdTitle:"Pack Gamer Console",bundleThirdDesc:"PlayStation Plus ou Xbox Game Pass + IPTV/streaming. Options et prix confirmés sur WhatsApp.",bundleThirdPrice:"Montant à confirmer",bundleCTA:"Voir le pack →",bundleOtherTitle:"À composer selon vos envies",bundleOtherDesc:"Vous avez une autre combinaison en tête ? Dites-nous les services souhaités et demandez un devis.",bundleAsk:"Demander un devis",catalogKicker:"Le catalogue",catalogTitle:"Trouvez votre prochain accès.",catalogSub:"Les offres et prix affichés sont indicatifs. Le montant final est confirmé dans WhatsApp avant tout transfert.",search:"Rechercher un service…",all:"Tout",video:"Vidéo",music:"Musique",gaming:"Gaming",tools:"Outils & IA",other:"Devis",bundle:"Packs",catalogHint:"Choisissez une carte pour voir les formules",from:"Dès",month:"/ mois",quotePrice:"Sur devis",popular:"À découvrir",emptyTitle:"Aucun service trouvé",emptyText:"Essayez un autre nom ou une autre catégorie.",resultOne:"service",resultMany:"services",
+      howKicker:"Simple, sans détour",howTitle:"Une demande en trois étapes.",howIntro:"Le site prépare votre demande. La confirmation et le paiement se font ensuite directement avec le vendeur.",step1Title:"Choisissez",step1Text:"Sélectionnez un service et une formule dans le catalogue.",step2Title:"Configurez",step2Text:"Choisissez la durée et MTN ou Airtel Money. Le prix reste estimatif.",step3Title:"Confirmez sur WhatsApp",step3Text:"Le vendeur confirme le montant exact et le numéro de transfert. Payez seulement après confirmation.",
+      faqKicker:"À savoir avant de choisir",faqTitle:"Les réponses, sans détour.",faqIntro:"Le parcours est conçu pour être clair avant qu’un paiement soit envisagé.",faq:[
+        ["Est-ce que le site encaisse le paiement ?","Non. Le site ne prend ni paiement ni coordonnées bancaires. Le bouton ouvre une demande WhatsApp ; le vendeur confirme le montant exact et le numéro MTN/Airtel à utiliser. Vous décidez ensuite si vous souhaitez effectuer le transfert."],
+        ["Pourquoi les prix sont-ils estimatifs ?","Les tarifs dépendent du service, de la disponibilité et du taux de conversion. Les montants affichés sont des estimations arrondies au 500 FCFA le plus proche, à confirmer par le vendeur avant tout paiement."],
+        ["Quels moyens de paiement sont proposés ?","Vous pouvez indiquer MTN Mobile Money ou Airtel Money dans votre demande. Le vendeur vous communique le numéro et le montant confirmés sur WhatsApp."],
+        ["Dois-je partager mon mot de passe ?","Ne partagez jamais de mot de passe ou de code de sécurité dans le formulaire ou le message prérempli. Les modalités d’accès sont à confirmer directement avec le vendeur."],
+        ["Quand ma commande est-elle traitée ?","Le site ne donne pas de délai de livraison garanti. Le vendeur vous indique la disponibilité et le délai estimé dans WhatsApp avant que vous ne payiez."],
+        ["StreamBox est-il affilié aux marques ?","Non. StreamBox Congo est un service indépendant. Les noms et marques cités appartiennent à leurs propriétaires respectifs."]
+      ],
+      legal:"Service indépendant, non affilié aux marques citées. Les tarifs sont des estimations à confirmer avant paiement.",footerContact:"Une question ?",plan:"Formule",duration:"Durée",payment:"Moyen de paiement",total:"Total estimatif",discount:"Réduction durée incluse",mo:"mois",orderButton:"Continuer sur WhatsApp",paymentExplain:"WhatsApp s’ouvrira avec votre demande. Le vendeur confirmera le montant exact et le numéro de transfert MTN/Airtel. Ce site n’encaisse pas de paiement. N’effectuez aucun transfert avant confirmation.",ticketHi:"Bonjour, je souhaite faire une demande :",ref:"Référence",service:"Service",planLabel:"Formule",durationLabel:"Durée",amount:"Montant estimatif",method:"Paiement souhaité",estimateNote:"Prix estimatif · à confirmer avant paiement.",quoteTitle:"Demander un devis",quoteText:"Il n’y a pas de prix catalogue pour ce service. Envoyez une demande WhatsApp pour préciser votre besoin ; le vendeur vous répondra avec les options et le montant à confirmer.",quoteCTA:"Demander un devis sur WhatsApp",close:"Fermer",noPlan:"Aucune formule disponible.",copyError:"Impossible d’ouvrir WhatsApp ? Copiez la référence et contactez le vendeur.",contactMessage:"Bonjour, j’ai une question sur StreamBox Congo.",bundleReference:"Demande pack",paymentMtn:"MTN Money",paymentAirtel:"Airtel Money",newOrder:"Demande",specQuality:"Qualité / rendu",specDevices:"Écrans / appareils",specAccess:"Type d’accès",specReplacement:"Support / remplacement",specUnknown:"À confirmer avec le vendeur."
+    },
+    en:{
+      navCatalog:"Catalogue",navHow:"How it works",navFaq:"FAQ",contact:"Talk to the team ↗",eyebrow:"Made for everyday life in Congo",
+      heroTitle:'Your subscriptions.<br><span>Your way to pay.</span>',heroSub:"Streaming, music, gaming and digital tools — choose a plan, then request it on WhatsApp with MTN or Airtel Money.",browse:"Explore the catalogue",stepsLink:"See how it works",heroNote:"WhatsApp request · payment confirmed manually · estimated prices",mobileMoney:"Local Mobile Money",orderRequest:"Your request, ready to send",
+      localCaption:"For Brazzaville, Pointe-Noire and the CEMAC region.",localPoint1:"No bank card required",localPoint2:"MTN or Airtel Money",localPoint3:"Amount confirmed before payment",
+      bundleKicker:"Useful combinations",bundleTitle:"Three bundles. One request.",bundleSub:"Estimated-price bundles or quotes, confirmed on WhatsApp.",bundleBadge:"BUNDLE • 5% OFF",bundleOneTitle:"Cinema + Music bundle",bundleOneDesc:"Netflix 4K + Spotify Individual. One combined basket, one WhatsApp conversation.",bundleOnePrice:"Estimated monthly price",bundleSecondBadge:"BUNDLE • 2 SERVICES",bundleSecondTitle:"Study & Create bundle",bundleSecondDesc:"ChatGPT Plus + Canva Pro. A study and creative combination, subject to availability.",bundleSecondPrice:"Estimated monthly price",bundleThirdBadge:"QUOTE ON REQUEST",bundleThirdTitle:"Console Gamer Bundle",bundleThirdDesc:"PlayStation Plus or Xbox Game Pass + IPTV/streaming. Options and price confirmed on WhatsApp.",bundleThirdPrice:"Price to confirm",bundleCTA:"View bundle →",bundleOtherTitle:"Build your own combination",bundleOtherDesc:"Have another combination in mind? Tell us which services you want and ask for a quote.",bundleAsk:"Request a quote",catalogKicker:"The catalogue",catalogTitle:"Find your next subscription.",catalogSub:"Offers and prices shown are estimates. The seller confirms the exact amount on WhatsApp before any transfer.",search:"Search services…",all:"All",video:"Video",music:"Music",gaming:"Gaming",tools:"Tools & AI",other:"Quotes",bundle:"Bundles",catalogHint:"Select a card to see available plans",from:"From",month:"/ month",quotePrice:"Request quote",popular:"Worth a look",emptyTitle:"No services found",emptyText:"Try a different name or category.",resultOne:"service",resultMany:"services",
+      howKicker:"Straightforward",howTitle:"A request in three steps.",howIntro:"The site prepares your request. Confirmation and payment then happen directly with the seller.",step1Title:"Choose",step1Text:"Select a service and plan from the catalogue.",step2Title:"Configure",step2Text:"Choose a duration and MTN or Airtel Money. Price is an estimate.",step3Title:"Confirm on WhatsApp",step3Text:"The seller confirms the exact amount and transfer number. Pay only after confirmation.",
+      faqKicker:"Before you choose",faqTitle:"Clear answers, upfront.",faqIntro:"The process is designed to be clear before you consider making a payment.",faq:[
+        ["Does this site collect payment?","No. This site does not accept payments or bank details. The button opens a WhatsApp request; the seller confirms the exact amount and MTN/Airtel transfer number. You decide whether to make the transfer."],
+        ["Why are prices estimates?","Prices depend on the service, availability and exchange rate. Displayed amounts are estimates rounded to the nearest 500 FCFA and must be confirmed by the seller before payment."],
+        ["Which payment methods can I use?","You can specify MTN Mobile Money or Airtel Money in your request. The seller shares the confirmed number and amount on WhatsApp."],
+        ["Do I need to share my password?","Never share a password or security code in the form or prefilled message. Confirm access arrangements directly with the seller."],
+        ["When will my order be processed?","The site does not promise a delivery time. The seller will tell you availability and an estimated timeframe on WhatsApp before you pay."],
+        ["Is StreamBox affiliated with these brands?","No. StreamBox Congo is an independent service. Names and brands belong to their respective owners."]
+      ],
+      legal:"Independent service, not affiliated with the brands mentioned. Prices are estimates to confirm before payment.",footerContact:"Questions?",plan:"Plan",duration:"Duration",payment:"Payment method",total:"Estimated total",discount:"Duration discount included",mo:"months",orderButton:"Continue on WhatsApp",paymentExplain:"WhatsApp will open with your request. The seller confirms the exact amount and MTN/Airtel transfer number. This site does not collect payment. Do not transfer funds before confirmation.",ticketHi:"Hello, I would like to request:",ref:"Reference",service:"Service",planLabel:"Plan",durationLabel:"Duration",amount:"Estimated amount",method:"Payment preference",estimateNote:"Estimated price · confirm before payment.",quoteTitle:"Request a quote",quoteText:"There is no catalogue price for this service. Send a WhatsApp request describing what you need; the seller will reply with options and an amount to confirm.",quoteCTA:"Request a quote on WhatsApp",close:"Close",noPlan:"No plans available.",copyError:"Can't open WhatsApp? Copy the reference and contact the seller.",contactMessage:"Hello, I have a question about StreamBox Congo.",bundleReference:"Bundle request",paymentMtn:"MTN Money",paymentAirtel:"Airtel Money",newOrder:"Request",specQuality:"Quality / output",specDevices:"Screens / devices",specAccess:"Access type",specReplacement:"Support / replacement",specUnknown:"Confirm with the seller."
+    }
+  };
+  TEXT.fr.systemStatus="Système actif · demandes 7j/7";
+  TEXT.en.systemStatus="System active · requests 7 days a week";
+  TEXT.fr.bundleKicker="Les packs";TEXT.fr.bundleTitle="Deux offres groupées";TEXT.fr.bundleSub="Les montants sont confirmés sur WhatsApp avant tout transfert.";
+  TEXT.fr.bundleBadge="PACK DUO";TEXT.fr.bundleOneTitle="Pack Duo";TEXT.fr.bundleOneDesc="Netflix Écran Solo + Spotify Individuel.";TEXT.fr.bundleOnePrice="Prix indicatif";
+  TEXT.fr.bundleSecondBadge="PACK • 3 SERVICES";TEXT.fr.bundleSecondTitle="Pack Master";TEXT.fr.bundleSecondDesc="Netflix Solo + YouTube Premium + Spotify.";TEXT.fr.bundleSecondPrice="Prix indicatif";
+  TEXT.en.bundleKicker="Bundles";TEXT.en.bundleTitle="Two bundled offers";TEXT.en.bundleSub="Confirm the amount on WhatsApp before making a transfer.";
+  TEXT.en.bundleBadge="DUO BUNDLE";TEXT.en.bundleOneTitle="Duo bundle";TEXT.en.bundleOneDesc="Netflix Solo screen + Spotify Individual.";TEXT.en.bundleOnePrice="Indicative price";
+  TEXT.en.bundleSecondBadge="BUNDLE • 3 SERVICES";TEXT.en.bundleSecondTitle="Master bundle";TEXT.en.bundleSecondDesc="Netflix Solo + YouTube Premium + Spotify.";TEXT.en.bundleSecondPrice="Indicative price";
+  TEXT.fr.catalogTitle="Choisissez votre offre.";TEXT.fr.catalogSub="Montants en FCFA. Confirmez la formule, la disponibilité et le montant sur WhatsApp avant tout transfert.";
+  TEXT.en.catalogTitle="Choose your offer.";TEXT.en.catalogSub="Prices in FCFA. Confirm the plan, availability and amount on WhatsApp before any transfer.";
+  TEXT.fr.estimateNote="Montant affiché en FCFA · confirmation avant paiement.";TEXT.en.estimateNote="Price shown in FCFA · confirm before payment.";
+  TEXT.fr.faq[1]=["Les prix sont-ils définitifs ?","Les prix affichés sont des repères. Le vendeur confirme la formule, sa disponibilité et le montant exact sur WhatsApp. Ne faites aucun transfert avant cette confirmation."];
+  TEXT.en.faq[1]=["Are prices final?","Displayed prices are guides. The seller confirms the plan, availability and exact amount on WhatsApp. Do not transfer money before that confirmation."];
+  const CHOICE_TEXT={
+    fr:{
+      ready:"Compte prêt à l’emploi",readyHelp:"Si cette option est disponible, le vendeur confirme l’accès et ses conditions avant paiement. Ne partagez aucun mot de passe ici.",
+      own:"Mon compte / achat externe",ownHelp:"Pour recharger votre compte ou acheter sur un autre site. Ajoutez un e-mail ou un lien si utile.",
+      detail:"E-mail du compte ou lien du produit (facultatif)",placeholder:"Ex. votre@email.com ou lien du produit",hint:"N’écrivez jamais de mot de passe, code PIN ou code reçu par SMS ici.",
+      option:"Choisissez comment vous souhaitez recevoir le service",readyShort:"Compte fourni",ownShort:"Mon compte / externe",
+      quoteHi:"Bonjour StreamBox ! Je souhaite demander :",optionLabel:"Option",detailLabel:"Précision",send:"Continuer sur WhatsApp"
+    },
+    en:{
+      ready:"Ready-to-use account",readyHelp:"If available, the seller confirms access and terms before payment. Do not share a password here.",
+      own:"My account / external purchase",ownHelp:"For a top-up on your account or a purchase elsewhere. Add an email or link if useful.",
+      detail:"Account email or product link (optional)",placeholder:"e.g. you@email.com or product link",hint:"Never enter a password, PIN or SMS code here.",
+      option:"Choose how you want to receive the service",readyShort:"Provided account",ownShort:"My account / external",
+      quoteHi:"Hello StreamBox! I would like to request:",optionLabel:"Option",detailLabel:"Note",send:"Continue on WhatsApp"
+    }
+  };
+  const choiceText=key=>CHOICE_TEXT[lang][key];
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+  let lang = "fr", category="all", searchTerm="", current=null, toastTimer;
+  try { const saved=localStorage.getItem("streambox-lang"); if(saved==="fr"||saved==="en")lang=saved; } catch(_){}
+  const t = key => TEXT[lang][key];
+  const label = value => typeof value==="string" ? value : (value?.[lang]||value?.fr||"");
+  const product = id => STORE.products.find(p=>p.id===id);
+  const SPEC_ICONS = {
+    quality:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg>',
+    devices:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+    access:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+    replacement:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.5 9A7 7 0 0 1 18 6l2 1M4 17l2 1a7 7 0 0 0 12.5-3"/></svg>'
+  };
+  const round500 = n => Math.round(n/500)*500;
+  const baseFcfa = (item,planIndex) => {
+    const configured=FCFA_PRICES[item.id]?.[planIndex];
+    if(configured!==undefined) return configured;
+    const p=item.plans[planIndex];
+    if(p?.components) return p.components.reduce((sum,[id,index])=>sum+baseFcfa(product(id),index),0)*(1-(item.discount??STORE.bundleDiscount));
+    return (p?.usd||0)*STORE.usdToFcfa;
+  };
+  const price = (item,planIndex,months=1) => {
+    const p=item.plans[planIndex];
+    if(p?.periodMonths===12) return FCFA_PRICES[item.id]?.[planIndex]||0;
+    return round500(baseFcfa(item,planIndex)*months*(1-(STORE.durationDiscount[months]||0)));
+  };
+  const money = n => `${new Intl.NumberFormat(lang==="fr"?"fr-FR":"en-US",{maximumFractionDigits:0}).format(n).replace(/[\u202f\u00a0]/g," ")} FCFA`;
+  const localized = value => typeof value==="string" ? value : value?.[lang]||value?.fr||"";
+  function planSpecsMarkup(plan){
+    const commonUnknown=lang==="fr"?"À confirmer avec le vendeur.":"Confirm with the seller.";
+    const rows=[
+      ["quality",plan.specs?.quality||commonUnknown],
+      ["devices",plan.specs?.devices||commonUnknown],
+      ["access",lang==="fr"?"Modalité de compte à confirmer ; ne partagez pas de mot de passe ici.":"Confirm account setup; do not share a password here."],
+      ["replacement",lang==="fr"?"Conditions de support ou remplacement à confirmer.":"Confirm support or replacement terms."]
+    ];
+    return `<span class="plan-specs">${rows.map(([key,value])=>`<span class="plan-spec">${SPEC_ICONS[key]}<span><b>${t(`spec${key[0].toUpperCase()}${key.slice(1)}`)}</b>${escapeHtml(localized(value))}</span></span>`).join("")}</span>`;
+  }
+  const waUrl = message => `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(message)}`;
+  const escapeHtml = value => String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  function makeRef(){const d=new Date(),part=[String(d.getFullYear()).slice(-2),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("");let random="";try{random=crypto.getRandomValues(new Uint32Array(1))[0].toString(36).slice(-4).toUpperCase()}catch(_){random=Math.random().toString(36).slice(2,6).toUpperCase()}return `SB-${part}-${random}`;}
+  function initText(){
+    document.documentElement.lang=lang;
+    $$("[data-i18n]").forEach(el=>{el.textContent=t(el.dataset.i18n)});
+    $$("[data-i18n-html]").forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml)});
+    $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
+    const notices=lang==="fr"
+      ?["MTN ou Airtel Money","Confirmez le prix sur WhatsApp avant paiement","Ne partagez jamais votre mot de passe"]
+      :["MTN or Airtel Money","Confirm the price on WhatsApp before paying","Never share your password"];
+    $("#trustTrack").innerHTML=[...notices,...notices].map(text=>`<span>${escapeHtml(text)}</span>`).join("");
+    $("#trustTrack").parentElement.setAttribute("aria-label",notices.join(" · "));
+    $("#search").placeholder=t("search");$("#search").setAttribute("aria-label",t("search"));
+    $("#contactLink").href=waUrl(t("contactMessage"));$("#footerContact").href=waUrl(t("contactMessage"));
+    document.title=`${STORE.brand} — ${lang==="fr"?"Vos abonnements, simplement":"Subscriptions, simply"}`;
+  }
+  const categories = ["all","video","music","gaming","tools","other","bundle"];
+  const fallbackLogo = item => {
+    const name=label(item.name)||item.name;
+    const known={Netflix:"NETFLIX","Prime Video":"PRIME","Disney+":"DISNEY","Spotify":"SPOTIFY","YouTube Premium":"YOUTUBE","Apple Music":"MUSIC","PlayStation Plus":"PLAYSTATION","Xbox Game Pass":"XBOX","ChatGPT Plus":"CHATGPT","Canva Pro":"CANVA"};
+    return known[name]||name.split(/\s+/).map(word=>word[0]).join("").slice(0,8).toUpperCase();
+  };
+  const logoClass = item => item.id==="prime"?"logo-prime":item.id==="canva"?"logo-canva":"";
+  const logoMarkup = item => item.logo
+    ? `<img class="${logoClass(item)}" src="${item.logo}" alt="" loading="lazy" decoding="async" onerror="this.classList.add('failed')"><span class="logo-fallback" aria-hidden="true">${escapeHtml(fallbackLogo(item))}</span>`
+    : `<span class="text-logo" aria-hidden="true">${escapeHtml(item.icon||"SB")}</span>`;
+  function renderFilters(){
+    $("#filters").innerHTML=categories.map(key=>`<button type="button" class="filter" data-category="${key}" aria-pressed="${category===key}">${t(key)}</button>`).join("");
+  }
+  function cardMarkup(item,index){
+    const isQuote=item.quote;
+    const min=isQuote?null:Math.min(...item.plans.map((_,i)=>price(item,i,1)));
+    const icon=logoMarkup(item);
+    return `<button type="button" class="product-card" style="--i:${index};--tint:${item.tint}" data-open="${item.id}" aria-label="${escapeHtml(label(item.name)||item.name)} — ${escapeHtml(isQuote?t("quotePrice"):`${t("from")} ${money(min)}`)}">
+      <span class="product-head"><span class="product-tile-title">${escapeHtml(label(item.name)||item.name)}</span><span class="product-icon">${icon}</span>${item.popular?`<span class="pop-tag">${t("popular")}</span>`:""}</span>
+      <span class="product-content"><h3>${escapeHtml(label(item.name)||item.name)}</h3><p>${escapeHtml(item.description[lang])}</p><span class="product-foot"><span class="${isQuote?"price-quote":"price-from"}">${isQuote?t("quotePrice"):`<small>${t("from")}</small><strong>${money(min)}</strong> <em>${t("month")}</em>`}</span><span class="open-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span>
+    </button>`;
+  }
+  function filteredItems(){
+    return STORE.products.filter(item=>{
+      const categoryOk=category==="all"||item.category===category;
+      const haystack=`${item.name} ${label(item.name)} ${item.description.fr} ${item.description.en}`.toLowerCase();
+      return categoryOk&&(!searchTerm||haystack.includes(searchTerm.toLowerCase()));
+    });
+  }
+  function renderCatalog(){
+    const items=filteredItems(),grid=$("#productGrid");
+    $("#resultsLabel").textContent=`${items.length} ${items.length===1?t("resultOne"):t("resultMany")}`;
+    if(!items.length){grid.innerHTML=`<div class="empty-state"><strong>${t("emptyTitle")}</strong>${t("emptyText")}</div>`;return;}
+    grid.innerHTML=items.map((item,i)=>cardMarkup(item,i)).join("");
+  }
+  function renderBundles(){
+    const bundles=[["cinema-music","bundleBadge","bundleOneTitle","bundleOneDesc","bundleOnePrice"],["pack-master","bundleSecondBadge","bundleSecondTitle","bundleSecondDesc","bundleSecondPrice"]];
+    $("#bundleGrid").innerHTML=bundles.map(([id,badge,title,desc,priceLabel],i)=>{
+      const item=product(id),amount=item.quote?null:money(price(item,0,1)),unit=item.quote?"":` <small style="display:inline">${t("month")}</small>`,action=item.quote?t("bundleAsk"):t("bundleCTA");
+      return `<article class="bundle-card ${i?"secondary":""}"><div class="bundle-top"><span class="bundle-tag">${t(badge)}</span><h3>${t(title)}</h3><p>${t(desc)}</p></div><div class="bundle-bottom"><div class="bundle-price"><small>${t(priceLabel)}</small><strong>${amount||t("quotePrice")}${unit}</strong></div><button type="button" class="bundle-link" data-open="${id}">${action}</button></div></article>`;
+    }).join("");
+  }
+  function renderSteps(){
+    $("#stepsList").innerHTML=[1,2,3].map((i)=>`<div class="step"><b>0${i}</b><strong>${t(`step${i}Title`)}</strong><span>${t(`step${i}Text`)}</span></div>`).join("");
+  }
+  function renderFaq(){ $("#faqList").innerHTML=t("faq").map(([q,a])=>`<details><summary>${escapeHtml(q)}</summary><p>${escapeHtml(a)}</p></details>`).join(""); }
+  function render(){
+    initText();renderFilters();renderBundles();renderCatalog();renderSteps();renderFaq();
+    if(current && $("#orderDialog").open){if(current.item.quote)drawQuoteDialog();else drawDialog();}
+  }
+  function accountChoicesMarkup(){
+    return `<div class="form-label">${choiceText("option")}</div><div class="account-choice">
+      <button type="button" data-mode="ready" aria-pressed="${current.mode==="ready"}"><strong>${choiceText("ready")}</strong><small>${choiceText("readyHelp")}</small></button>
+      <button type="button" data-mode="own" aria-pressed="${current.mode==="own"}"><strong>${choiceText("own")}</strong><small>${choiceText("ownHelp")}</small></button>
+    </div>`;
+  }
+  function orderDetailMarkup(){
+    if(current.mode!=="own")return "";
+    return `<label class="order-detail-label" for="orderDetail">${choiceText("detail")}<input class="order-detail" id="orderDetail" type="text" maxlength="180" autocomplete="off" placeholder="${escapeHtml(choiceText("placeholder"))}" value="${escapeHtml(current.detail||"")}"><small class="order-detail-hint">${choiceText("hint")}</small></label>`;
+  }
+  function orderMessage(item,planIndex,months,method,reference){
+    const plan=item.plans[planIndex],lines=[t("ticketHi"),`${t("ref")} : #${reference}`,`${t("service")} : ${label(item.name)||item.name}`,`${t("planLabel")} : ${label(plan.name)}`,`${t("durationLabel")} : ${months} ${t("mo")}`,`${choiceText("optionLabel")} : ${current.mode==="ready"?choiceText("readyShort"):choiceText("ownShort")}`];
+    if(current.mode==="own"&&current.detail.trim())lines.push(`${choiceText("detailLabel")} : ${current.detail.trim()}`);
+    lines.push(`${t("amount")} : ${money(price(item,planIndex,months))}`,`${t("method")} : ${method==="MTN"?t("paymentMtn"):t("paymentAirtel")}`,t("estimateNote"));
+    return lines.join("\n");
+  }
+  function quoteMessage(){
+    const item=current.item,name=label(item.name)||item.name,lines=[choiceText("quoteHi"),`${t("ref")} : #${current.ref}`,`${t("service")} : ${name}`,`${choiceText("optionLabel")} : ${current.mode==="ready"?choiceText("readyShort"):choiceText("ownShort")}`];
+    if(current.mode==="own"&&current.detail.trim())lines.push(`${choiceText("detailLabel")} : ${current.detail.trim()}`);
+    lines.push(`${t("amount")} : ${t("quotePrice")}`,`${t("method")} : ${current.method==="MTN"?t("paymentMtn"):t("paymentAirtel")}`,lang==="fr"?"Pouvez-vous confirmer les options et le montant avant paiement ?":"Please confirm the available options and amount before payment.");
+    return lines.join("\n");
+  }
+  function updateOrderPreview(){
+    if(!current)return;
+    const message=current.item.quote?quoteMessage():orderMessage(current.item,current.plan,current.months,current.method,current.ref);
+    const preview=$("#orderMessage"),link=$(".order-button, .quote-order-button");
+    if(preview)preview.textContent=message;
+    if(link)link.href=waUrl(message);
+  }
+  function drawDialog(){
+    const dlg=$("#orderDialog"),item=current.item,plan=item.plans[current.plan],total=price(item,current.plan,current.months),msg=orderMessage(item,current.plan,current.months,current.method,current.ref);
+    const planOptions=item.plans.map((p,i)=>`<button type="button" class="plan-option" data-plan="${i}" aria-pressed="${i===current.plan}"><span class="plan-copy"><strong>${escapeHtml(label(p.name))}</strong><small>${escapeHtml(p.detail[lang])}</small>${planSpecsMarkup(p)}</span><span class="plan-price">${money(price(item,i,1))}</span></button>`).join("");
+    const durationOptions=plan.periodMonths===12?[12]:[1,3,6];
+    const durations=durationOptions.map(m=>`<button type="button" data-months="${m}" aria-pressed="${m===current.months}">${m} ${t("mo")}<small>${STORE.durationDiscount[m]?`-${Math.round(STORE.durationDiscount[m]*100)}%`:lang==="fr"?"Sans réduction":"No discount"}</small></button>`).join("");
+    dlg.innerHTML=`<div class="dialog-inner"><div class="dialog-top"><div><div class="dialog-title-group"><span class="product-icon" style="--tint:${item.tint}">${logoMarkup(item)}</span><h2 id="dialogTitle">${escapeHtml(label(item.name)||item.name)}</h2></div><p class="dialog-desc">${escapeHtml(item.description[lang])}</p></div><button type="button" class="close-btn" data-close aria-label="${t("close")}">×</button></div>
+      ${accountChoicesMarkup()}${orderDetailMarkup()}
+      <div class="form-label">${t("plan")} <small>${lang==="fr"?"prix estimatif de l’offre":"estimated offer price"}</small></div><div class="plans">${planOptions}</div>
+      <div class="form-label">${t("duration")}</div><div class="segments">${durations}</div>
+      <div class="form-label">${t("payment")}</div><div class="segments payment-options"><button type="button" data-op="MTN" aria-pressed="${current.method==="MTN"}"><i class="payment-dot"></i>MTN Money</button><button type="button" data-op="Airtel" aria-pressed="${current.method==="Airtel"}"><i class="payment-dot"></i>Airtel Money</button></div>
+      <div class="payment-explain">${t("paymentExplain")}</div>
+      <div class="ticket" id="orderMessage">${escapeHtml(msg)}</div>
+      <div class="total-row"><span>${t("total")}</span><strong>${money(total)}</strong></div><div class="discount-hint">${t("discount")}: ${Math.round(STORE.durationDiscount[current.months]*100)}%</div>
+      <a class="order-button" href="${waUrl(msg)}" target="_blank" rel="noopener noreferrer"><span>${t("orderButton")}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="modal-legal">${t("estimateNote")} ${lang==="fr"?"Aucune affiliation avec le service sélectionné.":"No affiliation with the selected service."}</p></div>`;
+  }
+  function drawQuoteDialog(){
+    const dlg=$("#orderDialog"),item=current.item,name=label(item.name)||item.name,msg=quoteMessage();
+    dlg.innerHTML=`<div class="dialog-inner"><div class="dialog-top"><div class="dialog-title-group"><span class="product-icon" style="--tint:${item.tint}">${logoMarkup(item)}</span><h2 id="dialogTitle">${escapeHtml(name)}</h2></div><button type="button" class="close-btn" data-close aria-label="${t("close")}">×</button></div>
+      <p class="dialog-desc">${escapeHtml(item.description[lang])}</p>${accountChoicesMarkup()}${orderDetailMarkup()}
+      <div class="form-label">${t("payment")}</div><div class="segments payment-options"><button type="button" data-op="MTN" aria-pressed="${current.method==="MTN"}"><i class="payment-dot"></i>MTN Money</button><button type="button" data-op="Airtel" aria-pressed="${current.method==="Airtel"}"><i class="payment-dot"></i>Airtel Money</button></div>
+      <div class="quote-panel"><strong>${t("quoteTitle")}</strong>${t("quoteText")}<div class="ticket" id="orderMessage">${escapeHtml(msg)}</div><a class="order-button quote-order-button" target="_blank" rel="noopener noreferrer" href="${waUrl(msg)}">${choiceText("send")} ↗</a></div><p class="modal-legal">${t("paymentExplain")}</p></div>`;
+  }
+  function showToast(message){const el=$("#toast");el.textContent=message;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3800);}
+  function openProduct(id){
+    const item=product(id);if(!item)return;
+    if(item.quote){openQuote(item);return;}
+    current={item,plan:0,months:1,method:"MTN",mode:"ready",detail:"",ref:makeRef()};
+    drawDialog();
+    const dlg=$("#orderDialog");
+    try{dlg.showModal()}catch(_){showToast(t("copyError"));}
+  }
+  function openQuote(item){
+    current={item,plan:null,months:1,method:"MTN",mode:"own",detail:"",ref:makeRef()};
+    const dlg=$("#orderDialog");
+    drawQuoteDialog();
+    try{dlg.showModal()}catch(_){showToast(t("copyError"));}
+  }
+  function openGenericQuote(){
+    current=null;
+    const ref=makeRef(),msg=lang==="fr"?`Bonjour, je souhaite demander un devis pour une combinaison de services.\nRéférence : ${ref}\nVoici les services qui m’intéressent :`:`Hello, I would like a quote for a combination of services.\nReference: ${ref}\nThese are the services I’m interested in:`;
+    const dlg=$("#orderDialog");
+    dlg.innerHTML=`<div class="dialog-inner"><div class="dialog-top"><div><div class="section-kicker">${t("quoteTitle")}</div><h2 id="dialogTitle">${t("bundleOtherTitle")}</h2></div><button type="button" class="close-btn" data-close aria-label="${t("close")}">×</button></div><div class="quote-panel">${t("bundleOtherDesc")}<div class="ticket">${escapeHtml(msg)}</div><a class="button-primary" style="text-decoration:none" target="_blank" rel="noopener noreferrer" href="${waUrl(msg)}">${t("quoteCTA")} ↗</a></div><p class="modal-legal">${t("paymentExplain")}</p></div>`;
+    try{dlg.showModal()}catch(_){showToast(t("copyError"));}
+  }
+  document.addEventListener("click",e=>{
+    const langButton=e.target.closest("[data-lang]");
+    if(langButton){lang=langButton.dataset.lang;try{localStorage.setItem("streambox-lang",lang)}catch(_){}render();return;}
+    const filter=e.target.closest("[data-category]");
+    if(filter){category=filter.dataset.category;renderFilters();renderCatalog();return;}
+    const open=e.target.closest("[data-open]");
+    if(open){openProduct(open.dataset.open);return;}
+    if(e.target.closest("[data-quote-generic]")){openGenericQuote();return;}
+    const dlg=$("#orderDialog");
+    if(e.target.closest("[data-close]")){dlg.close();return;}
+    if(current&&dlg.open){
+      const mode=e.target.closest("[data-mode]");if(mode){current.mode=mode.dataset.mode;if(current.item.quote)drawQuoteDialog();else drawDialog();return;}
+      const plan=e.target.closest("[data-plan]");if(plan){current.plan=Number(plan.dataset.plan);current.months=current.item.plans[current.plan].periodMonths||1;drawDialog();return;}
+      const months=e.target.closest("[data-months]");if(months){current.months=Number(months.dataset.months);drawDialog();return;}
+      const method=e.target.closest("[data-op]");if(method){current.method=method.dataset.op;if(current.item.quote)drawQuoteDialog();else drawDialog();}
+    }
+  });
+  $("#orderDialog").addEventListener("input",e=>{
+    if(e.target.matches("#orderDetail")&&current){current.detail=e.target.value;updateOrderPreview();}
+  });
+  $("#search").addEventListener("input",e=>{searchTerm=e.target.value.trim();renderCatalog();});
+  $("#orderDialog").addEventListener("click",e=>{if(e.target===$("#orderDialog"))$("#orderDialog").close();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#orderDialog").open)$("#orderDialog").close();});
+  document.addEventListener("pointermove",e=>{
+    const card=e.target.closest?.(".product-card");if(card){const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;card.style.setProperty("--mx",`${x}px`);card.style.setProperty("--my",`${y}px`);if(e.pointerType==="mouse"){card.style.setProperty("--tilt-x",`${((x/r.width)-.5)*3}deg`);card.style.setProperty("--tilt-y",`${(.5-(y/r.height))*3}deg`);}}
+    if(e.pointerType==="mouse"){ledPointer.x=e.clientX;ledPointer.y=e.clientY;}
+  },{passive:true});
+  document.addEventListener("pointerout",e=>{const card=e.target.closest?.(".product-card");if(card&&!card.contains(e.relatedTarget)){card.style.setProperty("--tilt-x","0deg");card.style.setProperty("--tilt-y","0deg");}},{passive:true});
+  document.addEventListener("pointerdown",e=>{ledPointer.x=e.clientX;ledPointer.y=e.clientY;},{passive:true});
+  document.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse"){ledPointer.x=-999;ledPointer.y=-999;}},{passive:true});
+  const ledPointer={x:-999,y:-999};
+  (function setupLed(){
+    const canvas=$("#led"),ctx=canvas.getContext?.("2d");if(!ctx)return;
+    const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;let width=0,height=0,dots=[],raf=0;
+    function resize(){const dpr=Math.min(devicePixelRatio||1,1.6);width=innerWidth;height=innerHeight;canvas.width=Math.floor(width*dpr);canvas.height=Math.floor(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);dots=[];const gap=innerWidth<600?39:34,palette=["242,182,50","124,92,255","48,207,190"];for(let y=18;y<height;y+=gap)for(let x=18;x<width;x+=gap)dots.push({x,y,phase:Math.random()*6.28,bright:Math.random()<.36,color:palette[Math.floor(Math.random()*palette.length)]});}
+    function draw(time=0){ctx.clearRect(0,0,width,height);for(const d of dots){const influence=Math.max(0,1-Math.hypot(d.x-ledPointer.x,d.y-ledPointer.y)/150);const pulse=d.bright?.08*(.5+.5*Math.sin(time/850+d.phase)):0;const alpha=.035+pulse+influence*.54;ctx.fillStyle=`rgba(${d.color},${Math.min(alpha,.7)})`;ctx.beginPath();ctx.arc(d.x,d.y,1.15+influence*2.1,0,Math.PI*2);ctx.fill();}if(!reduce)raf=requestAnimationFrame(draw);}
+    resize();draw();addEventListener("resize",()=>{cancelAnimationFrame(raf);resize();draw();},{passive:true});
+  })();
+  render();
+  if("serviceWorker" in navigator && location.protocol!=="file:"){addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+  </script>
+</body>
+</html>

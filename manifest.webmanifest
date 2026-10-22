@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "StreamBox Congo",
+  "short_name": "StreamBox",
+  "description": "Demandes d’abonnements numériques avec Mobile Money au Congo.",
+  "lang": "fr-CG",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1120",
+  "theme_color": "#0f1120",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%230f1120'/%3E%3Crect x='25' y='37' width='142' height='118' rx='25' fill='none' stroke='%23f2b632' stroke-width='11'/%3E%3Cpath d='M82 66v60l48-30z' fill='%23f2b632'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
