@@ -1,5 +1,5 @@
 /* Relative-path service worker for plain static hosting and project subdirectories. */
-const CACHE_NAME = "streambox-congo-v5-1";
+const CACHE_NAME = "streambox-congo-v5-2";
 const BASE_URL = new URL("./", self.registration.scope);
 const CORE_FILES = [
   new URL("./", BASE_URL).href,
@@ -30,6 +30,8 @@ self.addEventListener("fetch", event => {
   const requestUrl = new URL(request.url);
   const basePath = new URL(BASE_URL).pathname;
   if (requestUrl.origin !== self.location.origin || !requestUrl.pathname.startsWith(basePath)) return;
+  // Trends are dynamic; let the browser reach the API instead of returning a stale cached response.
+  if (requestUrl.pathname === "/api" || requestUrl.pathname.startsWith("/api/")) return;
 
   if (request.mode === "navigate") {
     event.respondWith(

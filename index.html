@@ -176,9 +176,9 @@
     .form-label{display:flex;justify-content:space-between;align-items:center;color:#e8e7eb;font-size:14px;font-weight:700;margin:23px 0 9px}
     .form-label small{font-size:12px;font-weight:400;color:var(--muted)}
     .plans{display:grid;gap:8px}
-    .plan-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:1px solid #ffffff14;border-radius:12px;background:#ffffff05;padding:12px 13px;cursor:pointer;transition:border-color .18s,background .18s}
-    .plan-option:hover{border-color:#f5a62370}
-    .plan-option[aria-pressed=true]{border-color:var(--gold);background:#f5a6230d}
+    .plan-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:1px solid #ffffff14;border-radius:12px;background:#ffffff05;padding:12px 13px;cursor:pointer;transition:border-color .24s ease,background-color .24s ease,transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .24s ease}
+    .plan-option:hover{border-color:#f5a62370;transform:translateY(-1px)}
+    .plan-option[aria-pressed=true]{border-color:var(--gold);background:#f5a6230d;box-shadow:0 4px 16px #f5a6230b}
     .plan-copy{flex:1;min-width:0}
     .plan-copy strong{display:block;font-size:15px}
     .plan-copy small{display:block;color:var(--muted);font-size:13px;margin-top:3px}
@@ -356,6 +356,7 @@
 @media(min-width:901px){.trend-nav{display:flex}.poster{flex-basis:172px}}
 @media(max-width:900px){.hero{display:block}.hero-trends{margin-top:24px}.hero-steps{max-width:none}.poster{flex-basis:134px}}
 @media(prefers-reduced-motion:reduce){.poster,.poster-art{transition:none}.poster:hover{transform:none}.trends-track{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.plan-option,.plan-option:hover,.plan-option[aria-pressed=true]{transition:none!important;transform:none!important;box-shadow:none!important}}
 
 .trends-live{display:block;margin-top:5px;font-size:12px;font-weight:600;color:var(--mint)}
 .trends-live[data-state="default"]{color:var(--muted);font-weight:400}
@@ -375,7 +376,7 @@
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><rect class="brand-box" x="2" y="5" width="28" height="22" rx="6"/><path class="brand-play" d="M13 11.5v9l8-4.5z"/><circle class="brand-led" cx="25" cy="9.5" r="2"/></svg></span>
         <span>StreamBox <em>Congo</em></span>
       </a>
-      <span class="system-status"><i aria-hidden="true"></i><span data-i18n="systemStatus">Système actif · commandes traitées de 8h à 15h</span></span>
+      <span class="system-status"><i aria-hidden="true"></i><span data-i18n="systemStatus">Système actif · commandes traitées de 8h à 15h, lundi au vendredi</span></span>
       <nav class="navlinks" aria-label="Navigation principale">
         <a href="#catalogue" data-i18n="navCatalog">Catalogue</a><a href="#how" data-i18n="navHow">Comment ça marche</a><a href="#faq" data-i18n="navFaq">FAQ</a>
       </nav>
@@ -553,8 +554,8 @@
       legal:"Independent service, not affiliated with the brands mentioned. Prices are estimates to confirm before payment.",footerContact:"Questions?",plan:"Plan",duration:"Duration",payment:"Payment method",total:"Estimated total",discount:"Duration discount included",mo:"months",orderButton:"Continue on WhatsApp",paymentExplain:"WhatsApp will open with your request. The seller confirms the exact amount and MTN/Airtel transfer number. This site does not collect payment. Do not transfer funds before confirmation.",ticketHi:"Hello, I would like to request:",ref:"Reference",service:"Service",planLabel:"Plan",durationLabel:"Duration",amount:"Estimated amount",method:"Payment preference",estimateNote:"Estimated price · confirm before payment.",quoteTitle:"Request a quote",quoteText:"There is no catalogue price for this service. Send a WhatsApp request describing what you need; the seller will reply with options and an amount to confirm.",quoteCTA:"Request a quote on WhatsApp",close:"Close",noPlan:"No plans available.",copyError:"Can't open WhatsApp? Copy the reference and contact the seller.",contactMessage:"Hello, I have a question about StreamBox Congo.",bundleReference:"Bundle request",paymentMtn:"MTN Money",paymentAirtel:"Airtel Money",newOrder:"Request",specQuality:"Quality / output",specDevices:"Screens / devices",specAccess:"Access type",specReplacement:"Support / replacement",specUnknown:"Confirm with the seller."
     }
   };
-  TEXT.fr.systemStatus="Système actif · commandes traitées de 8h à 15h";
-  TEXT.en.systemStatus="System active · orders processed 8am–3pm";
+  TEXT.fr.systemStatus="Système actif · commandes traitées de 8h à 15h, lundi au vendredi";
+  TEXT.en.systemStatus="System active · orders processed 8am–3pm, Monday to Friday";
   TEXT.fr.bundleKicker="Les packs";TEXT.fr.bundleTitle="Deux offres groupées";TEXT.fr.bundleSub="Les montants sont confirmés sur WhatsApp avant tout transfert.";
   TEXT.fr.bundleBadge="PACK DUO";TEXT.fr.bundleOneTitle="Pack Duo";TEXT.fr.bundleOneDesc="Netflix Basic + Spotify Individuel.";TEXT.fr.bundleOnePrice="Prix indicatif";
   TEXT.fr.bundleSecondBadge="PACK • 3 SERVICES";TEXT.fr.bundleSecondTitle="Pack Master";TEXT.fr.bundleSecondDesc="Netflix Basic + YouTube Premium + Spotify.";TEXT.fr.bundleSecondPrice="Prix indicatif";
@@ -566,8 +567,8 @@
   TEXT.fr.estimateNote="Montant affiché en FCFA · confirmation avant paiement.";TEXT.en.estimateNote="Price shown in FCFA · confirm before payment.";
   TEXT.fr.faq[1]=["Les prix sont-ils définitifs ?","Les prix affichés sont des repères. Le vendeur confirme la formule, sa disponibilité et le montant exact sur WhatsApp. Ne faites aucun transfert avant cette confirmation."];
   TEXT.en.faq[1]=["Are prices final?","Displayed prices are guides. The seller confirms the plan, availability and exact amount on WhatsApp. Do not transfer money before that confirmation."];
-  TEXT.fr.faq[4]=["Quand ma commande est-elle traitée ?","Les commandes sont traitées chaque jour de 8h à 15h. Hors de ces heures, votre demande est prise en charge à l’ouverture suivante. Le vendeur confirme le délai exact sur WhatsApp avant tout paiement."];
-  TEXT.en.faq[4]=["When is my order processed?","Orders are processed daily from 8am to 3pm. Outside these hours, your request is handled at the next opening. The seller confirms the exact timing on WhatsApp before any payment."];
+  TEXT.fr.faq[4]=["Quand ma commande est-elle traitée ?","Les commandes sont traitées du lundi au vendredi, de 8h à 15h. Hors de ces heures, votre demande est prise en charge à l’ouverture suivante. Le vendeur confirme le délai exact sur WhatsApp avant tout paiement."];
+  TEXT.en.faq[4]=["When is my order processed?","Orders are processed Monday to Friday from 8am to 3pm. Outside these hours, your request is handled at the next opening. The seller confirms the exact timing on WhatsApp before any payment."];
   const CHOICE_TEXT={
     fr:{
       ready:"Compte prêt à l’emploi",readyHelp:"Si cette option est disponible, le vendeur confirme l’accès et ses conditions avant paiement. Ne partagez aucun mot de passe ici.",
@@ -632,8 +633,8 @@
     $$("[data-i18n-html]").forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml)});
     $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
     const notices=lang==="fr"
-      ?["MTN ou Airtel Money","Confirmez le prix sur WhatsApp avant paiement","Ne partagez jamais votre mot de passe","Commandes traitées de 8h à 15h"]
-      :["MTN or Airtel Money","Confirm the price on WhatsApp before paying","Never share your password","Orders processed 8am–3pm"];
+      ?["MTN ou Airtel Money","Confirmez le prix sur WhatsApp avant paiement","Ne partagez jamais votre mot de passe","Commandes traitées du lundi au vendredi, de 8h à 15h"]
+      :["MTN or Airtel Money","Confirm the price on WhatsApp before paying","Never share your password","Orders processed Monday to Friday, 8am–3pm"];
     $("#trustTrack").innerHTML=[...notices,...notices].map(text=>`<span>${escapeHtml(text)}</span>`).join("");
     $("#trustTrack").parentElement.setAttribute("aria-label",notices.join(" · "));
     $("#search").placeholder=t("search");$("#search").setAttribute("aria-label",t("search"));
@@ -735,6 +736,18 @@
       <a class="order-button" href="${waUrl(msg)}" target="_blank" rel="noopener noreferrer"><span>${t("orderButton")}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="modal-legal">${t("estimateNote")} ${lang==="fr"?"Aucune affiliation avec le service sélectionné.":"No affiliation with the selected service."}</p></div>`;
   }
+  function redrawDialogPreservingScroll(redraw,focusSelector){
+    const dlg=$("#orderDialog"),pageTop=window.scrollY,dialogTop=dlg.scrollTop;
+    redraw();
+    const restore=()=>{
+      window.scrollTo(0,pageTop);
+      dlg.scrollTop=dialogTop;
+      const focus=dlg.querySelector(focusSelector);
+      if(focus)focus.focus({preventScroll:true});
+    };
+    restore();
+    requestAnimationFrame(restore);
+  }
   function drawQuoteDialog(){
     const dlg=$("#orderDialog"),item=current.item,name=label(item.name)||item.name,msg=quoteMessage();
     dlg.innerHTML=`<div class="dialog-inner"><div class="dialog-top"><div class="dialog-title-group"><span class="product-icon" style="--tint:${item.tint}">${logoMarkup(item)}</span><h2 id="dialogTitle">${escapeHtml(name)}</h2></div><button type="button" class="close-btn" data-close aria-label="${t("close")}">×</button></div>
@@ -779,10 +792,10 @@
     const dlg=$("#orderDialog");
     if(e.target.closest("[data-close]")){dlg.close();return;}
     if(current&&dlg.open){
-      const mode=e.target.closest("[data-mode]");if(mode){current.mode=mode.dataset.mode;if(current.item.quote)drawQuoteDialog();else drawDialog();return;}
-      const plan=e.target.closest("[data-plan]");if(plan){current.plan=Number(plan.dataset.plan);current.months=current.item.plans[current.plan].periodMonths||1;drawDialog();return;}
-      const months=e.target.closest("[data-months]");if(months){current.months=Number(months.dataset.months);drawDialog();return;}
-      const method=e.target.closest("[data-op]");if(method){current.method=method.dataset.op;if(current.item.quote)drawQuoteDialog();else drawDialog();}
+      const mode=e.target.closest("[data-mode]");if(mode){current.mode=mode.dataset.mode;redrawDialogPreservingScroll(()=>current.item.quote?drawQuoteDialog():drawDialog(),`[data-mode="${current.mode}"]`);return;}
+      const plan=e.target.closest("[data-plan]");if(plan){current.plan=Number(plan.dataset.plan);current.months=current.item.plans[current.plan].periodMonths||1;redrawDialogPreservingScroll(drawDialog,`[data-plan="${current.plan}"]`);return;}
+      const months=e.target.closest("[data-months]");if(months){current.months=Number(months.dataset.months);redrawDialogPreservingScroll(drawDialog,`[data-months="${current.months}"]`);return;}
+      const method=e.target.closest("[data-op]");if(method){current.method=method.dataset.op;redrawDialogPreservingScroll(()=>current.item.quote?drawQuoteDialog():drawDialog(),`[data-op="${current.method}"]`);}
     }
   });
   $("#orderDialog").addEventListener("input",e=>{
@@ -807,21 +820,20 @@
     resize();draw();addEventListener("resize",()=>{cancelAnimationFrame(raf);resize();draw();},{passive:true});
   })();
   /* ================= TENDANCES (TMDB) =================
-     Une requête "discover" par plateforme (Netflix 8, Prime Video 119, Disney+ 337), triée par popularité :
-     chaque affiche est déjà sur la plateforme annoncée. Région = pays dont le catalogue sert de référence.
-     La clé v3 est visible dans le code de la page (normal pour ce type de clé) : régénérez-la si elle est détournée.
-     Les affiches de secours s'affichent immédiatement ; TMDB les remplace s'il répond à temps. */
-  const TMDB={key:"15d2ea6d0daf1e476e34327ba5735309",base:"https://api.themoviedb.org/3",img:"https://image.tmdb.org/t/p",region:"FR",timeout:9000,freshMs:60*60*1000,cacheKey:"sb-trends-v2",providers:[["netflix","8"],["prime","119"],["disney","337"]]};
+     Les affiches de secours s'affichent immédiatement ; le serveur les remplace s'il répond à temps. */
+  const TMDB={img:"https://image.tmdb.org/t/p",timeout:9000,freshMs:60*60*1000,cacheKey:"sb-trends-v2"};
   const PLAT={netflix:{n:"Netflix",c:"#e64b58"},prime:{n:"Prime Video",c:"#53a9d9"},disney:{n:"Disney+",c:"#668de7"},apple:{n:"Apple TV",c:"#b8bcc9"}};
   const TREND_FALLBACK=[
-    {title:"Squid Game",platform:"netflix",poster:null},
-    {title:"The Boys",platform:"prime",poster:null},
-    {title:"The Mandalorian",platform:"disney",poster:null},
-    {title:"Wednesday",platform:"netflix",poster:null}
+    {title:"Squid Game",platform:"netflix",poster:"/4CYXVmNnvYxZw4kE78hybZuEvgY.jpg"},
+    {title:"The Boys",platform:"prime",poster:"/in1R2dDc421JxsoRWaIIAqVI2KE.jpg"},
+    {title:"The Mandalorian",platform:"disney",poster:"/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg"},
+    {title:"Wednesday",platform:"netflix",poster:"/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"}
   ];
   let TRENDS=TREND_FALLBACK.slice(),trendState="default",trendsLoadedAt=0,trendError="";
   function posterMarkup(tr,i){
-    const pl=PLAT[tr.platform],img=tr.poster?`<img src="${TMDB.img}/w185${escapeHtml(tr.poster)}" srcset="${TMDB.img}/w185${escapeHtml(tr.poster)} 185w, ${TMDB.img}/w342${escapeHtml(tr.poster)} 342w" sizes="170px" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:"";
+    const pl=PLAT[tr.platform],fallback=TREND_FALLBACK.find(f=>f.platform===tr.platform)?.poster||TREND_FALLBACK[0].poster;
+    const path=typeof tr.poster==="string"&&/^\/[A-Za-z0-9._-]+$/.test(tr.poster)?tr.poster:fallback;
+    const img=`<img src="${TMDB.img}/w500${escapeHtml(path)}" data-fallback="${TMDB.img}/w500${escapeHtml(fallback)}" alt="" loading="lazy" decoding="async" onerror="if(this.dataset.fallback&&this.src!==this.dataset.fallback){this.src=this.dataset.fallback;}else{this.remove();}">`;
     const ini=tr.title.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();
     return `<button type="button" class="poster" data-trend="${i}" style="--tint:${pl.c};--pc:${pl.c}" aria-label="${escapeHtml(tr.title)} — ${pl.n}"><span class="poster-art">${img}<span class="poster-mark" aria-hidden="true">${escapeHtml(ini)}</span><span class="poster-title">${escapeHtml(tr.title)}</span></span><span class="poster-badge">${pl.n}</span></button>`;
   }
@@ -838,14 +850,10 @@
   async function fetchTrends(){
     const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),TMDB.timeout),lg=lang==="fr"?"fr-FR":"en-US";
     try{
-      const lists=await Promise.all(TMDB.providers.map(async([platform,id])=>{
-        const bearer=TMDB.key.length>60;
-        const r=await fetch(`${TMDB.base}/discover/tv?${bearer?"":"api_key="+TMDB.key+"&"}language=${lg}&sort_by=popularity.desc&watch_region=${TMDB.region}&with_watch_providers=${id}&with_watch_monetization_types=flatrate&page=1`,{signal:ctrl.signal,headers:bearer?{Authorization:"Bearer "+TMDB.key,accept:"application/json"}:undefined});
-        if(!r.ok)throw new Error("TMDB "+r.status);
-        const j=await r.json();
-        return (j.results||[]).filter(x=>x.poster_path&&(x.name||x.original_name)).slice(0,2).map(x=>({title:x.name||x.original_name,platform,poster:x.poster_path}));
-      }));
-      const out=[];for(let k=0;k<2;k++)lists.forEach(l=>{if(l[k])out.push(l[k]);});
+      const r=await fetch(`/api/tmdb/trends?language=${encodeURIComponent(lg)}`,{signal:ctrl.signal});
+      if(!r.ok)throw new Error("TMDB "+r.status);
+      const data=await r.json();
+      const out=Array.isArray(data)?data.filter(x=>x&&typeof x.title==="string"&&typeof x.poster==="string"&&PLAT[x.platform]).slice(0,6):[];
       if(out.length<3)throw new Error("too few results");
       const fill=TREND_FALLBACK.filter(f=>!out.some(g=>g.title===f.title));
       return out.concat(fill).slice(0,Math.max(4,Math.min(5,out.length)));
