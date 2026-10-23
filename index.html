@@ -367,6 +367,52 @@
 .poster-mark{position:absolute;top:38%;left:0;right:0;transform:translateY(-50%);text-align:center;font:800 58px/1 var(--display);letter-spacing:-.04em;color:#ffffff33;text-shadow:0 0 24px #ffffff22}
 .poster-art img~.poster-mark{display:none}
 </style>
+  <style id="sx-styles">
+    /* ===== StreamBox Services (PayForMe + Boost) — added styles. Uses existing theme variables. ===== */
+    .sx-section{padding-bottom:10px}
+    .sx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+    .sx-card{appearance:none;font:inherit;text-align:left;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px;min-height:190px;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);cursor:pointer;transform:translateZ(0);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;animation:fadeUp .45s both;animation-delay:calc(var(--i,0)*70ms);-webkit-tap-highlight-color:transparent}
+    .sx-card:hover,.sx-card:focus-visible{transform:translate3d(0,-3px,0);border-color:var(--gold);box-shadow:0 18px 40px #0006}
+    .sx-card:active{transform:scale(.985)}
+    .sx-card strong{font:700 19px/1.2 var(--display)}
+    .sx-card span:not(.sx-icon){color:var(--muted);font-size:14px;line-height:1.5;flex:1}
+    .sx-card em{font-style:normal;font-weight:700;font-size:14px;color:var(--gold)}
+    .sx-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--surface2);color:var(--gold)}
+    .sx-icon svg{width:22px;height:22px}
+    .sx-how{appearance:none;display:inline-flex;align-items:center;gap:10px;margin-top:16px;min-height:44px;padding:8px 16px 8px 8px;border:1px dashed var(--line);border-radius:999px;background:transparent;color:var(--ink);font:600 14px var(--body);cursor:pointer;transition:border-color .2s,transform .2s}
+    .sx-how:hover{border-color:var(--gold);transform:translate3d(0,-1px,0)}
+    .sx-how>span:first-child{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--on-gold);font-weight:800}
+    .sx-chips{display:flex;flex-wrap:wrap;gap:8px}
+    .sx-chips button{flex:1 1 auto;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:#ffffff05;color:var(--ink);font:700 14px var(--body);cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+    .sx-chips button:active{transform:scale(.97)}
+    .sx-chips button[aria-pressed="true"]{border-color:var(--gold);background:#f5a6231c;color:var(--gold2)}
+    .sx-chips button small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+    .sx-type{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .sx-type button{text-align:left;padding:12px}
+    .sx-field{display:block;margin-top:4px}
+    .sx-field .order-detail{font-size:16px}
+    .sx-usd{position:relative}
+    .sx-usd b{position:absolute;left:12px;top:50%;transform:translateY(-50%);margin-top:3px;color:var(--muted)}
+    .sx-usd .order-detail{padding-left:28px}
+    .sx-hint{display:block;margin-top:6px;color:var(--muted);font-size:12.5px;line-height:1.45}
+    .sx-hint.warn{color:var(--red,#ff8c83)}
+    .sx-fee{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:16px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font-size:13px}
+    .sx-fee span{padding:5px 9px;border-radius:8px;background:var(--surface2);color:var(--ink);font-variant-numeric:tabular-nums}
+    .sx-fee span small{color:var(--muted);margin-right:4px}
+    .sx-fee i{font-style:normal;color:var(--muted);font-weight:700}
+    .sx-fee span.total{background:#f5a6231f;color:var(--gold2);font-weight:800}
+    .sx-notice{display:flex;gap:10px;margin-top:14px;padding:12px 13px;border:1px solid #77c7a24d;border-radius:12px;background:#77c7a20f;color:var(--ink);font-size:13px;line-height:1.5}
+    .sx-notice svg{flex:none;width:20px;height:20px;color:var(--mint,#77c7a2)}
+    .sx-steps{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;counter-reset:sx}
+    .sx-steps li{counter-increment:sx;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);font-size:14px;line-height:1.5;color:var(--muted)}
+    .sx-steps li:before{content:counter(sx);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--on-gold);font-weight:800}
+    .sx-steps li b{display:block;color:var(--ink)}
+    .order-button[aria-disabled="true"]{opacity:.45;filter:saturate(.6);cursor:not-allowed}
+    #sxAmountTotal{font-variant-numeric:tabular-nums}
+    @media(max-width:900px){.sx-grid{grid-template-columns:1fr 1fr}.sx-grid>:first-child{grid-column:1/-1}}
+    @media(max-width:560px){.sx-grid{grid-template-columns:1fr}.sx-card{min-height:0;padding:17px}.sx-type{grid-template-columns:1fr}.sx-how{width:100%}}
+    @media(prefers-reduced-motion:reduce){.sx-card,.sx-how,.sx-chips button{transition:none;animation:none}}
+  </style>
 </head>
 <body>
   <canvas id="led" aria-hidden="true"></canvas>
@@ -378,7 +424,7 @@
       </a>
       <span class="system-status"><i aria-hidden="true"></i><span data-i18n="systemStatus">Système actif · commandes traitées de 8h à 15h, lundi au vendredi</span></span>
       <nav class="navlinks" aria-label="Navigation principale">
-        <a href="#catalogue" data-i18n="navCatalog">Catalogue</a><a href="#how" data-i18n="navHow">Comment ça marche</a><a href="#faq" data-i18n="navFaq">FAQ</a>
+        <a href="#catalogue" data-i18n="navCatalog">Catalogue</a><a href="#services" data-sx="nav">Services</a><a href="#how" data-i18n="navHow">Comment ça marche</a><a href="#faq" data-i18n="navFaq">FAQ</a>
       </nav>
       <div class="header-actions">
         <a class="contact-link" id="contactLink" target="_blank" rel="noopener noreferrer" href="#" data-i18n="contact">Parler à l’équipe ↗</a>
@@ -414,6 +460,16 @@
         <div class="float-card one"><i class="tiny-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8h14M5 16h14"/></svg></i><div><strong>MTN / Airtel</strong><span data-i18n="mobileMoney">Mobile Money local</span></div></div>
         <div class="float-card two"><i class="tiny-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.6-.85L4 20l1.85-4.9A7.5 7.5 0 1 1 20 11.5Z"/><path d="M9 10h.01M15 10h.01M9 14h6"/></svg></i><div><strong>WhatsApp</strong><span data-i18n="orderRequest">Votre demande, prête à envoyer</span></div></div>
       </div>
+    </section>
+    <!-- ===== StreamBox Services (PayForMe + Boost) — added section ===== -->
+    <section class="wrap section sx-section" id="services" aria-labelledby="sxTitle">
+      <div class="section-heading"><div><div class="section-kicker" data-sx="kicker">Nos services</div><h2 id="sxTitle" data-sx="title">Trois façons de vous aider.</h2></div><p data-sx="sub">Choisissez ce dont vous avez besoin. Vous voyez le prix tout de suite, puis vous envoyez la demande sur WhatsApp.</p></div>
+      <div class="sx-grid">
+        <a class="sx-card" href="#catalogue" style="--i:0"><span class="sx-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="13" rx="3"/><path d="m10 9 5 2.5-5 2.5V9Z" fill="currentColor"/></svg></span><strong data-sx="p1Title">Abonnements</strong><span data-sx="p1Text">Netflix, Spotify, jeux, outils… Choisissez la formule et la durée.</span><em data-sx="p1Cta">Voir le catalogue →</em></a>
+        <button type="button" class="sx-card" data-sx-open="pay" style="--i:1"><span class="sx-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg></span><strong data-sx="p2Title">PayForMe</strong><span data-sx="p2Text">On paie pour vous sur un site étranger : boutique, logiciel, licence, recharge de compte.</span><em data-sx="p2Cta">Calculer mon prix →</em></button>
+        <button type="button" class="sx-card" data-sx-open="boost" style="--i:2"><span class="sx-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 17 10 11l4 4 6-7"/><path d="M15 8h5v5"/></svg></span><strong data-sx="p3Title">Boost réseaux</strong><span data-sx="p3Text">Plus d’abonnés, de vues ou de likes sur TikTok, Instagram, Facebook, YouTube, WhatsApp.</span><em data-sx="p3Cta">Booster mon compte →</em></button>
+      </div>
+      <button type="button" class="sx-how" data-sx-open="how"><span aria-hidden="true">?</span><span data-sx="howBtn">Comment ça marche ? Payer avec MTN ou Airtel Money</span></button>
     </section>
     <section class="wrap section catalogue" id="catalogue">
       <div class="section-heading"><div><div class="section-kicker" data-i18n="catalogKicker">Le catalogue</div><h2 data-i18n="catalogTitle">Trouvez votre prochain accès.</h2></div><p data-i18n="catalogSub">Les offres et prix affichés sont indicatifs. Le montant final est confirmé dans WhatsApp avant tout transfert.</p></div>
@@ -883,6 +939,235 @@
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadTrends();});
   setInterval(()=>{if(!document.hidden)loadTrends();},TMDB.freshMs);
   if("serviceWorker" in navigator && location.protocol!=="file:"){addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+  </script>
+  <script>
+  /* ================= StreamBox Services: PayForMe + Boost (added module) =================
+     Runs after the main script and reuses: lang, $, $$, money, waUrl, makeRef, escapeHtml,
+     showToast, redrawDialogPreservingScroll, render. Nothing from the main script is removed.
+     MERCHANT SETTINGS — edit the prices and fees here.
+  ======================================================================================== */
+  const SX_SETTINGS = {
+    fxPerUsd: (typeof BANK!=="undefined" && BANK.fxPerUsd) || 610, // FCFA per 1 USD
+    concierge: { feeRate: 0.10, minFee: 1000, minUsd: 5, maxUsd: 2000 },
+    boost: {
+      quantities: [500, 1000, 5000, 10000],
+      minPrice: 1000,
+      // FCFA price per 1 000 units. Remove a line to hide that option.
+      per1000: {
+        tiktok:    { followers: 5000, likes: 2000, views: 1000, engagement: 6000 },
+        instagram: { followers: 5000, likes: 2000, views: 1000, engagement: 6000 },
+        facebook:  { followers: 5000, likes: 2500, views: 1500 },
+        youtube:   { subscribers: 15000, views: 4000, likes: 3000 },
+        whatsapp:  { followers: 6000 }
+      }
+    }
+  };
+  const SX_TEXT = {
+    fr: {
+      nav:"Services", kicker:"Nos services", title:"Trois façons de vous aider.",
+      sub:"Choisissez ce dont vous avez besoin. Vous voyez le prix tout de suite, puis vous envoyez la demande sur WhatsApp.",
+      p1Title:"Abonnements", p1Text:"Netflix, Spotify, jeux, outils… Choisissez la formule et la durée.", p1Cta:"Voir le catalogue →",
+      p2Title:"PayForMe", p2Text:"On paie pour vous sur un site étranger : boutique, logiciel, licence, recharge de compte.", p2Cta:"Calculer mon prix →",
+      p3Title:"Boost réseaux", p3Text:"Plus d’abonnés, de vues ou de likes sur TikTok, Instagram, Facebook, YouTube, WhatsApp.", p3Cta:"Booster mon compte →",
+      howBtn:"Comment ça marche ? Payer avec MTN ou Airtel Money",
+      payTitle:"PayForMe — On paie pour vous", payDesc:"Vous voulez payer sur un site étranger (Deriv, ExpertOption, boutique, logiciel…) ? Dites-nous combien, on s’en occupe.",
+      site:"Nom du site ou de l’appli", sitePh:"Ex. : Deriv, AliExpress, Canva…",
+      type:"Comment on paie ?", typeLink:"Lien de paiement", typeLinkHelp:"Vous nous envoyez le lien, on paie.", typeRefill:"Recharge du compte", typeRefillHelp:"On recharge votre compte avec vos accès.",
+      login:"Identifiant du compte (e-mail ou n° client)", loginPh:"Ex. : nom@mail.com", loginHint:"Ne tapez pas votre mot de passe ici. Vous l’enverrez en privé sur WhatsApp après notre accord.",
+      usd:"Montant en dollars ($)", usdPh:"Ex. : 50", usdHint:(a,b)=>`Entre ${a} $ et ${b} $. Taux : 1 $ = ${SX_SETTINGS.fxPerUsd} FCFA.`, usdWarn:(a,b)=>`Le montant doit être entre ${a} $ et ${b} $.`,
+      feeAmount:"Montant", feeService:"Frais de service", feeTotal:"Total",
+      security:"Vos accès sont uniquement utilisés pour effectuer la recharge. Pensez à modifier votre mot de passe juste après la validation.",
+      boostTitle:"Boost réseaux sociaux", boostDesc:"Choisissez le réseau, ce que vous voulez augmenter et la quantité. Le prix se calcule tout seul.",
+      platform:"Réseau social", service:"Ce que vous voulez", qty:"Quantité", link:"Lien du compte ou de la vidéo", linkPh:"Ex. : https://www.tiktok.com/@moncompte",
+      linkHint:"Le compte doit être public. On ne demande jamais votre mot de passe.", linkWarn:"Collez le lien pour continuer.",
+      followers:"Abonnés", subscribers:"Abonnés", views:"Vues", likes:"J’aime", engagement:"Interactions",
+      payment:"Paiement", total:"Total à payer", send:"Envoyer sur WhatsApp", fill:"Remplissez les cases pour continuer.",
+      estimate:"Prix indicatif. Le montant final est confirmé sur WhatsApp avant de payer.",
+      howTitle:"Comment ça marche ?", howIntro:"Simple et sûr. Vous ne payez qu’après notre réponse.",
+      how1:["Vous choisissez","Un abonnement, un paiement PayForMe ou un boost."],
+      how2:["Vous envoyez la demande","Le message WhatsApp est déjà prêt. Appuyez juste sur Envoyer."],
+      how3:["On confirme","On vérifie et on vous donne le montant exact et le numéro où payer."],
+      how4:["Vous payez par Mobile Money","Avec MTN Mobile Money ou Airtel Money. Envoyez-nous la capture du paiement."],
+      how5:["On livre","Vous recevez votre accès, votre recharge ou votre boost."],
+      howWarn:"Ne payez jamais avant notre confirmation sur WhatsApp.", ok:"J’ai compris",
+      msgPay:"Bonjour StreamBox Congo, voici ma demande PayForMe :", msgBoost:"Bonjour StreamBox Congo, voici ma demande de boost :",
+      mRef:"Réf.", mService:"Service", mSite:"Site / appli", mType:"Type", mAccount:"Compte", mAmountUsd:"Montant", mFee:"Frais de service", mTotal:"Total à payer", mPay:"Paiement",
+      mPlatform:"Réseau", mWhat:"Service", mQty:"Quantité", mLink:"Lien",
+      mLinkNote:"Je vous envoie le lien de paiement ici.", mRefillNote:"J’enverrai mes accès en privé après votre confirmation.", mEnd:"Merci de confirmer avant que je paie.",
+      svcPay:"Conciergerie digitale (PayForMe)", svcBoost:"Boost & visibilité"
+    },
+    en: {
+      nav:"Services", kicker:"Our services", title:"Three ways we can help.",
+      sub:"Pick what you need. You see the price right away, then send your request on WhatsApp.",
+      p1Title:"Subscriptions", p1Text:"Netflix, Spotify, games, tools… Pick your plan and how long.", p1Cta:"See the catalogue →",
+      p2Title:"PayForMe", p2Text:"We pay for you on foreign websites: shops, software, licences, account top-ups.", p2Cta:"Get my price →",
+      p3Title:"Social boost", p3Text:"More followers, views or likes on TikTok, Instagram, Facebook, YouTube, WhatsApp.", p3Cta:"Boost my account →",
+      howBtn:"How it works? Pay with MTN or Airtel Money",
+      payTitle:"PayForMe — We pay for you", payDesc:"Need to pay on a foreign website (Deriv, ExpertOption, a shop, software…)? Tell us how much, we handle it.",
+      site:"Website or app name", sitePh:"E.g. Deriv, AliExpress, Canva…",
+      type:"How do we pay?", typeLink:"Payment link", typeLinkHelp:"You send us the link, we pay.", typeRefill:"Account top-up", typeRefillHelp:"We top up your account using your login.",
+      login:"Account ID (email or client number)", loginPh:"E.g. name@mail.com", loginHint:"Do not type your password here. Send it privately on WhatsApp after we agree.",
+      usd:"Amount in dollars ($)", usdPh:"E.g. 50", usdHint:(a,b)=>`Between $${a} and $${b}. Rate: $1 = ${SX_SETTINGS.fxPerUsd} FCFA.`, usdWarn:(a,b)=>`The amount must be between $${a} and $${b}.`,
+      feeAmount:"Amount", feeService:"Service fee", feeTotal:"Total",
+      security:"Your credentials are only used for the refill. Please remember to change your password right after completion.",
+      boostTitle:"Social media boost", boostDesc:"Pick the network, what you want to grow and how much. The price updates by itself.",
+      platform:"Social network", service:"What you want", qty:"Quantity", link:"Account or video link", linkPh:"E.g. https://www.tiktok.com/@myaccount",
+      linkHint:"The account must be public. We never ask for your password.", linkWarn:"Paste the link to continue.",
+      followers:"Followers", subscribers:"Subscribers", views:"Views", likes:"Likes", engagement:"Engagement",
+      payment:"Payment", total:"Total to pay", send:"Send on WhatsApp", fill:"Fill in the boxes to continue.",
+      estimate:"Estimated price. The final amount is confirmed on WhatsApp before you pay.",
+      howTitle:"How it works?", howIntro:"Simple and safe. You only pay after we reply.",
+      how1:["You choose","A subscription, a PayForMe payment or a boost."],
+      how2:["You send the request","The WhatsApp message is ready. Just tap Send."],
+      how3:["We confirm","We check and give you the exact amount and the number to pay."],
+      how4:["You pay with Mobile Money","With MTN Mobile Money or Airtel Money. Send us a screenshot of the payment."],
+      how5:["We deliver","You get your access, your top-up or your boost."],
+      howWarn:"Never pay before we confirm on WhatsApp.", ok:"Got it",
+      msgPay:"Hello StreamBox Congo, here is my PayForMe request:", msgBoost:"Hello StreamBox Congo, here is my boost request:",
+      mRef:"Ref.", mService:"Service", mSite:"Website / app", mType:"Type", mAccount:"Account", mAmountUsd:"Amount", mFee:"Service fee", mTotal:"Total to pay", mPay:"Payment",
+      mPlatform:"Network", mWhat:"Service", mQty:"Quantity", mLink:"Link",
+      mLinkNote:"I will send the payment link here.", mRefillNote:"I will send my login privately after you confirm.", mEnd:"Please confirm before I pay.",
+      svcPay:"Digital concierge (PayForMe)", svcBoost:"Boost & visibility"
+    }
+  };
+  const SX_PLATFORMS = { tiktok:"TikTok", instagram:"Instagram", facebook:"Facebook", youtube:"YouTube", whatsapp:"WhatsApp" };
+  const sx = key => { const v=(SX_TEXT[lang]||SX_TEXT.fr)[key]; return v===undefined?SX_TEXT.fr[key]:v; };
+  const sxCeil100 = n => Math.ceil(n/100)*100;
+  const sxNum = n => new Intl.NumberFormat(lang==="fr"?"fr-FR":"en-US",{maximumFractionDigits:2}).format(n).replace(/[\u202f\u00a0]/g," ");
+  let sxState = null;
+
+  /* ---------- pricing (pure functions) ---------- */
+  function sxConciergeQuote(usd){
+    const c=SX_SETTINGS.concierge, amount=Number(usd);
+    const valid=Number.isFinite(amount)&&amount>=c.minUsd&&amount<=c.maxUsd;
+    if(!valid) return {valid:false,base:0,fee:0,total:0};
+    const base=sxCeil100(amount*SX_SETTINGS.fxPerUsd), fee=Math.max(c.minFee,sxCeil100(base*c.feeRate));
+    return {valid:true,base,fee,total:base+fee};
+  }
+  function sxBoostPrice(platform,service,qty){
+    const rate=SX_SETTINGS.boost.per1000[platform]?.[service];
+    if(!rate) return 0;
+    return Math.max(SX_SETTINGS.boost.minPrice,sxCeil100(rate*qty/1000));
+  }
+
+  /* ---------- page section text ---------- */
+  function sxApplyText(){
+    $$("[data-sx]").forEach(el=>{el.textContent=sx(el.dataset.sx);});
+  }
+
+  /* ---------- shared bits ---------- */
+  const sxPaymentMarkup = () => `<div class="form-label">${sx("payment")}</div><div class="segments payment-options"><button type="button" data-sx-op="MTN" aria-pressed="${sxState.method==="MTN"}"><i class="payment-dot"></i>MTN Money</button><button type="button" data-sx-op="Airtel" aria-pressed="${sxState.method==="Airtel"}"><i class="payment-dot"></i>Airtel Money</button></div>`;
+  const sxHead = (title,desc,icon) => `<div class="dialog-top"><div><div class="dialog-title-group"><span class="product-icon" style="--tint:#f2b632"><span class="text-logo" aria-hidden="true">${icon}</span></span><h2 id="dialogTitle">${escapeHtml(title)}</h2></div><p class="dialog-desc">${escapeHtml(desc)}</p></div><button type="button" class="close-btn" data-close aria-label="${t("close")}">×</button></div>`;
+  const sxSendMarkup = () => `<div class="ticket" id="sxTicket"></div><div class="total-row"><span>${sx("total")}</span><strong id="sxAmountTotal">—</strong></div><a class="order-button" data-sx-send target="_blank" rel="noopener noreferrer" href="#"><span>${sx("send")}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><p class="modal-legal">${sx("estimate")}</p>`;
+  const sxMethod = () => sxState.method==="MTN"?"MTN Mobile Money":"Airtel Money";
+
+  /* ---------- PayForMe ---------- */
+  function sxPayMessage(q){
+    const s=sxState,lines=[sx("msgPay"),`${sx("mRef")} : #${s.ref}`,`${sx("mService")} : ${sx("svcPay")}`,`${sx("mSite")} : ${s.site.trim()||"—"}`,`${sx("mType")} : ${s.type==="link"?sx("typeLink"):sx("typeRefill")}`];
+    if(s.type==="refill"&&s.login.trim())lines.push(`${sx("mAccount")} : ${s.login.trim()}`);
+    lines.push(`${sx("mAmountUsd")} : ${q.valid?sxNum(Number(s.usd)):"—"} $ (≈ ${q.valid?money(q.base):"—"})`,`${sx("mFee")} : ${q.valid?money(q.fee):"—"}`,`${sx("mTotal")} : ${q.valid?money(q.total):"—"}`,`${sx("mPay")} : ${sxMethod()}`,s.type==="link"?sx("mLinkNote"):sx("mRefillNote"),sx("mEnd"));
+    return lines.join("\n");
+  }
+  function sxDrawPay(){
+    const s=sxState,c=SX_SETTINGS.concierge;
+    $("#orderDialog").innerHTML=`<div class="dialog-inner">${sxHead(sx("payTitle"),sx("payDesc"),"$")}
+      <label class="order-detail-label sx-field" for="sxSite"><span class="form-label">${sx("site")}</span><input class="order-detail" id="sxSite" data-sx-field="site" type="text" maxlength="80" autocomplete="off" placeholder="${escapeHtml(sx("sitePh"))}" value="${escapeHtml(s.site)}"></label>
+      <div class="form-label">${sx("type")}</div><div class="sx-chips sx-type"><button type="button" data-sx-type="link" aria-pressed="${s.type==="link"}"><strong>${sx("typeLink")}</strong><small>${sx("typeLinkHelp")}</small></button><button type="button" data-sx-type="refill" aria-pressed="${s.type==="refill"}"><strong>${sx("typeRefill")}</strong><small>${sx("typeRefillHelp")}</small></button></div>
+      ${s.type==="refill"?`<label class="order-detail-label sx-field" for="sxLogin"><span class="form-label">${sx("login")}</span><input class="order-detail" id="sxLogin" data-sx-field="login" type="text" maxlength="80" autocomplete="off" placeholder="${escapeHtml(sx("loginPh"))}" value="${escapeHtml(s.login)}"><small class="sx-hint">${sx("loginHint")}</small></label>
+      <div class="sx-notice" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.3 7.5 9.5 4.3-1.2 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg><span>${sx("security")}</span></div>`:""}
+      <label class="order-detail-label sx-field" for="sxUsd"><span class="form-label">${sx("usd")}</span><span class="sx-usd"><b>$</b><input class="order-detail" id="sxUsd" data-sx-field="usd" type="number" inputmode="decimal" min="${c.minUsd}" max="${c.maxUsd}" step="0.01" placeholder="${escapeHtml(sx("usdPh"))}" value="${escapeHtml(s.usd)}"></span><small class="sx-hint" id="sxUsdHint">${sx("usdHint")(c.minUsd,c.maxUsd)}</small></label>
+      <div class="sx-fee" aria-live="polite"><span><small>${sx("feeAmount")}</small><b id="sxFeeBase">—</b></span><i>+</i><span><small>${sx("feeService")}</small><b id="sxFeeService">—</b></span><i>=</i><span class="total"><small>${sx("feeTotal")}</small><b id="sxFeeTotal">—</b></span></div>
+      ${sxPaymentMarkup()}<div class="payment-explain">${t("paymentExplain")}</div>${sxSendMarkup()}</div>`;
+    sxRefresh();
+  }
+
+  /* ---------- Boost ---------- */
+  function sxBoostMessage(total){
+    const s=sxState;
+    return [sx("msgBoost"),`${sx("mRef")} : #${s.ref}`,`${sx("mService")} : ${sx("svcBoost")}`,`${sx("mPlatform")} : ${SX_PLATFORMS[s.platform]}`,`${sx("mWhat")} : ${sx(s.service)}`,`${sx("mQty")} : +${sxNum(s.qty)}`,`${sx("mLink")} : ${s.link.trim()||"—"}`,`${sx("mTotal")} : ${money(total)}`,`${sx("mPay")} : ${sxMethod()}`,sx("mEnd")].join("\n");
+  }
+  function sxDrawBoost(){
+    const s=sxState,b=SX_SETTINGS.boost,services=Object.keys(b.per1000[s.platform]);
+    $("#orderDialog").innerHTML=`<div class="dialog-inner">${sxHead(sx("boostTitle"),sx("boostDesc"),"↗")}
+      <div class="form-label">${sx("platform")}</div><div class="sx-chips">${Object.keys(b.per1000).map(p=>`<button type="button" data-sx-platform="${p}" aria-pressed="${p===s.platform}">${SX_PLATFORMS[p]}</button>`).join("")}</div>
+      <div class="form-label">${sx("service")}</div><div class="sx-chips">${services.map(k=>`<button type="button" data-sx-service="${k}" aria-pressed="${k===s.service}">${sx(k)}</button>`).join("")}</div>
+      <div class="form-label">${sx("qty")}</div><div class="sx-chips">${b.quantities.map(q=>`<button type="button" data-sx-qty="${q}" aria-pressed="${q===s.qty}">+${sxNum(q)}<small>${money(sxBoostPrice(s.platform,s.service,q))}</small></button>`).join("")}</div>
+      <label class="order-detail-label sx-field" for="sxLink"><span class="form-label">${sx("link")}</span><input class="order-detail" id="sxLink" data-sx-field="link" type="url" inputmode="url" maxlength="200" autocomplete="off" placeholder="${escapeHtml(sx("linkPh"))}" value="${escapeHtml(s.link)}"><small class="sx-hint" id="sxLinkHint">${sx("linkHint")}</small></label>
+      ${sxPaymentMarkup()}<div class="payment-explain">${t("paymentExplain")}</div>${sxSendMarkup()}</div>`;
+    sxRefresh();
+  }
+
+  /* ---------- How it works ---------- */
+  function sxDrawHow(){
+    $("#orderDialog").innerHTML=`<div class="dialog-inner"><div class="dialog-top"><div><div class="section-kicker">MTN · Airtel Money</div><h2 id="dialogTitle">${sx("howTitle")}</h2><p class="dialog-desc">${sx("howIntro")}</p></div><button type="button" class="close-btn" data-close aria-label="${t("close")}">×</button></div>
+      <ol class="sx-steps">${[1,2,3,4,5].map(i=>{const [a,b]=sx(`how${i}`);return `<li><span><b>${escapeHtml(a)}</b>${escapeHtml(b)}</span></li>`;}).join("")}</ol>
+      <div class="sx-notice" role="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.3 7.5 9.5 4.3-1.2 7.5-5 7.5-9.5V6L12 3Z"/><path d="M12 8v5M12 16h.01"/></svg><span>${sx("howWarn")}</span></div>
+      <button type="button" class="order-button" data-close style="width:100%;border:0;cursor:pointer"><span>${sx("ok")}</span></button></div>`;
+  }
+
+  /* ---------- live refresh without redraw (no layout shift) ---------- */
+  function sxRefresh(){
+    if(!sxState||sxState.kind==="how")return;
+    let msg,total=0,ready=false;
+    if(sxState.kind==="pay"){
+      const q=sxConciergeQuote(sxState.usd);total=q.total;
+      const set=(id,v)=>{const el=$(id);if(el)el.textContent=v;};
+      set("#sxFeeBase",q.valid?money(q.base):"—");set("#sxFeeService",q.valid?money(q.fee):"—");set("#sxFeeTotal",q.valid?money(q.total):"—");
+      const hint=$("#sxUsdHint"),c=SX_SETTINGS.concierge,typed=String(sxState.usd).trim()!=="";
+      if(hint){hint.textContent=typed&&!q.valid?sx("usdWarn")(c.minUsd,c.maxUsd):sx("usdHint")(c.minUsd,c.maxUsd);hint.classList.toggle("warn",typed&&!q.valid);}
+      ready=q.valid&&sxState.site.trim().length>1;msg=sxPayMessage(q);
+    }else{
+      total=sxBoostPrice(sxState.platform,sxState.service,sxState.qty);
+      ready=sxState.link.trim().length>3;msg=sxBoostMessage(total);
+    }
+    const ticket=$("#sxTicket"),link=$("[data-sx-send]"),tot=$("#sxAmountTotal");
+    if(ticket)ticket.textContent=msg;
+    if(tot)tot.textContent=total?money(total):"—";
+    if(link){link.href=ready?waUrl(msg):"#";link.setAttribute("aria-disabled",String(!ready));}
+  }
+  function sxRedraw(focus){
+    const draw=sxState.kind==="pay"?sxDrawPay:sxState.kind==="boost"?sxDrawBoost:sxDrawHow;
+    redrawDialogPreservingScroll(draw,focus||".close-btn");
+  }
+  function sxOpen(kind){
+    current=null; // keep the main order logic out of this dialog
+    const first=Object.keys(SX_SETTINGS.boost.per1000)[0];
+    sxState=kind==="pay"?{kind,site:"",type:"link",login:"",usd:"",method:"MTN",ref:makeRef()}
+      :kind==="boost"?{kind,platform:first,service:Object.keys(SX_SETTINGS.boost.per1000[first])[0],qty:SX_SETTINGS.boost.quantities[1],link:"",method:"MTN",ref:makeRef()}
+      :{kind:"how"};
+    (kind==="pay"?sxDrawPay:kind==="boost"?sxDrawBoost:sxDrawHow)();
+    const dlg=$("#orderDialog");
+    try{if(!dlg.open)dlg.showModal();dlg.scrollTop=0;}catch(_){showToast(t("copyError"));}
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener("click",e=>{
+    const send=e.target.closest("[data-sx-send]");
+    if(send&&send.getAttribute("aria-disabled")==="true"){e.preventDefault();showToast(sxState?.kind==="boost"?sx("linkWarn"):sx("fill"));return;}
+    const opener=e.target.closest("[data-sx-open]");
+    if(opener){sxOpen(opener.dataset.sxOpen);return;}
+    if(!sxState||!$("#orderDialog").open)return;
+    const op=e.target.closest("[data-sx-op]");if(op){sxState.method=op.dataset.sxOp;$$("[data-sx-op]").forEach(b=>b.setAttribute("aria-pressed",String(b===op)));sxRefresh();return;}
+    const type=e.target.closest("[data-sx-type]");if(type){sxState.type=type.dataset.sxType;sxRedraw(`[data-sx-type="${sxState.type}"]`);return;}
+    const pf=e.target.closest("[data-sx-platform]");if(pf){sxState.platform=pf.dataset.sxPlatform;const list=Object.keys(SX_SETTINGS.boost.per1000[sxState.platform]);if(!list.includes(sxState.service))sxState.service=list[0];sxRedraw(`[data-sx-platform="${sxState.platform}"]`);return;}
+    const sv=e.target.closest("[data-sx-service]");if(sv){sxState.service=sv.dataset.sxService;sxRedraw(`[data-sx-service="${sxState.service}"]`);return;}
+    const qt=e.target.closest("[data-sx-qty]");if(qt){sxState.qty=Number(qt.dataset.sxQty);$$("[data-sx-qty]").forEach(b=>b.setAttribute("aria-pressed",String(b===qt)));sxRefresh();return;}
+  });
+  document.addEventListener("input",e=>{
+    const field=e.target.closest?.("[data-sx-field]");
+    if(!field||!sxState)return;
+    sxState[field.dataset.sxField]=field.value;sxRefresh();
+  });
+  $("#orderDialog").addEventListener("close",()=>{sxState=null;});
+  // Any other dialog opened by the main script clears this module's state.
+  ["openProduct","openQuote","openGenericQuote","openTrend"].forEach(name=>{
+    const original=window[name];if(typeof original!=="function")return;
+    window[name]=function(){sxState=null;return original.apply(this,arguments);};
+  });
+  // Language switch: the main render() is kept, this module just adds its own text on top.
+  const sxBaseRender=render;
+  render=function(){sxBaseRender();sxApplyText();if(sxState&&$("#orderDialog").open)sxRedraw();};
+  sxApplyText();
   </script>
 </body>
 </html>
